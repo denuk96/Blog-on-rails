@@ -7,9 +7,18 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+    <div class="devise">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <div>
+      <a href="<%= new_user_session_path %>">Log in</a>
+      <a href="<%= new_user_registration_path %>">Registration</a>
+    </div>
     <%= yield %>
   </body>
 </html>
