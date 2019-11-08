@@ -1,5 +1,6 @@
 
 # Blog-on-rails
-Scaffold - done
-Bootsrap - done
-Validation - done
+Scaffold - ✓
+Bootsrap - ✓
+Validation - ✓
+Devise - ✓
