@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'posts#index', as: 'home'
   resources :posts #, except: [:destroy]
 
-  namespace :admin do
-    resources :posts
-  end
+  # namespace :admin do
+  #   resources :posts
+  # end
 end
