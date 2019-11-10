@@ -55,13 +55,18 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+ # check for Admin/notAdmin
   def destroy
+    if current_user.admin == true
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Only for admins allowed' }
+      end
     end
   end
 
