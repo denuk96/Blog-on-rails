@@ -22,17 +22,31 @@
         <% end %>
       </nav>
       <% if user_signed_in? %>
-        <%= link_to 'Log out', destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete  %>
+        <%= link_to 'Log out', destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
       <% else %>
         <%= link_to 'Log in', new_user_session_path, class: 'btn btn-outline-primary' %>
         <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-primary' %>
       <% end %>
     </div>
 
-
-
 <!--    <p class="notice"><%#= notice %></p>-->
 <!--    <p class="alert"><%#= alert %></p>-->
+
     <%= yield %>
+    <footer>
+      <% if user_signed_in? %>
+        <% if current_user.admin == true %>
+        <% else %>
+          <div class="alert alert-primary" role="alert">
+            To get admin`s rules(edit, destroy) - admin@example.com, password 'blabla'
+          </div>
+        <% end %>
+      <% else %>
+        <div class="alert alert-primary" role="alert">
+          To get admin`s rules(edit, destroy) - admin@example.com, password 'blabla'
+        </div>
+      <% end %>
+    </footer>
+
   </body>
 </html>
