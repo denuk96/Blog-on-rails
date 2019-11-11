@@ -60,9 +60,9 @@ class PostsController < ApplicationController
     end
   end
 
- # check Admin/notAdmin
-  def destroy
 
+  def destroy
+    # only for 'admin = true' allowed
       if current_user.admin == true
       @post.destroy
       respond_to do |format|
