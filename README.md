@@ -6,4 +6,4 @@ Validation - ✓
 Devise - ✓
 Users and admins - ✓
 
-To get admin`s rules(edit, destroy) - admin@example.com, password 'blabla'
+To get admin`s rights(edit, destroy) - admin@example.com, password 'blabla'
