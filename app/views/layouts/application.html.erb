@@ -35,7 +35,9 @@
 
     <%= yield %>
 
-    <footer>
+
+<!--  for dev-->
+    <div class="devs">
       <% if user_signed_in? %>
         <% if current_user.admin == true %>
         <% else %>
@@ -50,7 +52,9 @@
           SQL isn`t ignored=) This message will disappear)
         </div>
       <% end %>
-    </footer>
+    </div>
+<!--end-->
+
 
   </body>
 </html>
