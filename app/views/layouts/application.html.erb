@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
   </head>
 
   <body>
@@ -37,7 +38,7 @@
 
 
 <!--  for dev-->
-    <div class="devs">
+    <div class="classDev">
       <% if user_signed_in? %>
         <% if current_user.admin == true %>
         <% else %>

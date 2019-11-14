@@ -9,15 +9,18 @@
             </div>
             <div class="card-body">
               <p class="card-text"><%= post.content %></p>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li><%= link_to 'Show', post, class:'btn btn-info btn-lg btn-block' %></li>
+
+              <div class="btn-group" role="group">
+                <%= link_to 'Show', post, class:'btn btn-info' %>
                 <% if user_signed_in? %>
                   <% if current_user.admin == true %>
-                    <li><%= link_to 'Edit', edit_post_path(post), class:'btn btn-warning btn-lg btn-block' %></li>
-                    <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger btn-lg btn-block' %></li>
+                    <%= link_to 'Edit', edit_post_path(post), class:'btn btn-warning' %>
+                    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %>
                   <% end %>
                 <% end %>
-              </ul>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -25,3 +28,4 @@
     <% end %>
   </div>
 </div>
+
