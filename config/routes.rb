@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'posts#index', as: 'home'
-  resources :posts #, except: [:destroy]
+  resources :posts
 
-  # namespace :admin do
-  #   resources :posts
-  # end
+  resources :posts do
+    resources :comments
+    end
 end
