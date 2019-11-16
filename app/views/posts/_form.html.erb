@@ -34,6 +34,11 @@
     <%= form.text_area :content, class:'form-control' %>
   </div>
 
+  <div class="control-group">
+    <%= form.label :author %><br>
+    <%= form.select :author, options_for_select(Author.all.map{|t| [(t.first_name) +" "+ (t.last_name), t.id]}), :prompt => 'select author' %>
+  </div>
+
   <div class="actions">
     <%= form.submit class:'btn btn-info btn-lg btn-block' %>
   </div>
