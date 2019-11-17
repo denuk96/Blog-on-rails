@@ -18,6 +18,7 @@
   </div>
 </div>
 
+<%= image_tag(@post.picture) if @post.picture.attached? %>
 
 <%= render @post.comments %>
 <%= render 'comments/form' %>

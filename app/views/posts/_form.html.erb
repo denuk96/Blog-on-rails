@@ -11,13 +11,10 @@
     </div>
   <% end %>
 
-
-
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, class:'form-control' %>
   </div>
-
 
   <div class="field">
     <%= form.label :title %>
@@ -29,10 +26,14 @@
     <%= form.text_area :content, class:'form-control' %>
   </div>
 
-  <div>
+  <div class="dropdown">
     <%= form.collection_select(:author_id, Author.all, :id, :first_name) %>
   </div>
 
+  <div>
+    <%= form.label :picture %>
+    <%= form.file_field :picture %>
+  </div>
 
   <div class="actions">
     <%= form.submit class:'btn btn-info btn-lg btn-block' %>
