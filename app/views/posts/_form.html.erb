@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_for(@post) do |form| %>
   <% if post.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -10,11 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-<!--  <div class="field">-->
-    <%#= form.label :name %>
-    <%#= form.text_field :name, class:'form-control' %>
-<!--  </div>-->
 
 
 
@@ -34,10 +29,10 @@
     <%= form.text_area :content, class:'form-control' %>
   </div>
 
-  <div class="control-group">
-    <%= form.label :author %><br>
-    <%= form.select :author, options_for_select(Author.all.map{|t| [(t.first_name) +" "+ (t.last_name), t.id]}), :prompt => 'select author' %>
+  <div>
+    <%= form.collection_select(:author_id, Author.all, :id, :first_name) %>
   </div>
+
 
   <div class="actions">
     <%= form.submit class:'btn btn-info btn-lg btn-block' %>

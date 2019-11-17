@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :author
-  has_many :comments
+  AUTHORS_all = Author.all
+  has_many :comments, dependent: :destroy
 
   validates :title, :content , presence: true,
             length: { minimum: 5 }

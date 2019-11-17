@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @authors = Author.all
+
   end
 
 
@@ -30,6 +30,7 @@ class PostsController < ApplicationController
     if user_signed_in?
 
       @post = Post.new(post_params)
+
       respond_to do |format|
         if @post.save
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -66,6 +67,7 @@ class PostsController < ApplicationController
     # only for 'admin = true' allowed
       if current_user.admin == true
       @post.destroy
+
       respond_to do |format|
         format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
         format.json { head :no_content }
@@ -86,6 +88,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :title, :content)
+      params.require(:post).permit(:name, :title, :content, :author_id)
     end
 end
