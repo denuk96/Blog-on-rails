@@ -27,7 +27,7 @@
   </div>
 
   <div class="dropdown">
-    <%= form.collection_select(:author_id, Author.all, :id, :full_name, class:'form-control' ) %>
+    <%= form.collection_select(:author_id, Author.all, :id, :full_name, class:'form-control', prompt:'choose author' ) %>
   </div>
 
   <div>
