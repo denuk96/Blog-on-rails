@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
-
   # Devise
   before_action :authenticate_user!, except: [:index, :show]
+  #impressionist
+  impressionist :actions=>[:show]
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+
 
 
   def index
@@ -12,6 +14,8 @@ class PostsController < ApplicationController
 
 
   def show
+    #impressionist
+    impressionist(@post) # 2nd argument is optional
   end
 
 

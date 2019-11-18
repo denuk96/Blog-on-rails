@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
-  belongs_to :author
+  belongs_to :author, counter_cache: true
+
   has_many :comments, dependent: :destroy
   has_one_attached :picture, dependent: :destroy
 
@@ -7,4 +8,7 @@ class Post < ApplicationRecord
             length: { minimum: 5 }
   validates :name, presence: true,
             length: { minimum: 3 }
+
+  #impressionist
+  is_impressionable
 end

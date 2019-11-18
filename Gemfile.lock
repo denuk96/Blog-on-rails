@@ -96,6 +96,8 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -233,6 +235,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise (~> 4.7, >= 4.7.1)
   faker (~> 2.7)
+  impressionist
   jbuilder (~> 2.7)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

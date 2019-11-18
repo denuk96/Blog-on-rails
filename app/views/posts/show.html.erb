@@ -5,7 +5,7 @@
       <h4 class="my-0 font-weight-small"><%= @post.author.first_name %> <%= @post.author.last_name %></h4>
     </div>
     <div class="card-body">
-      <p class="card-text" style="background-image: url('<%= rails_blob_url(@post.picture) %>'); height: 100px; background-position: center;"><%= @post.content %></p>
+      <p class="card-text" style="background-image: url('<%= rails_blob_url(@post.picture) %>'); height: 100px; background-position: center;"><%= @post.content %><%= @post.impressionist_count %></p>
       <ul class="list-unstyled mt-3 mb-4">
         <% if user_signed_in? %>
           <% if current_user.admin == true %>
