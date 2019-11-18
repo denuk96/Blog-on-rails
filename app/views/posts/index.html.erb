@@ -8,7 +8,7 @@
               <h3 class="my-0 font-weight-normal"><%= post.title %></h3>
             </div>
             <div class="card-body"><%= post.author.full_name %>
-              <p class="card-text"><%= post.content %></p>
+              <p class="card-text"><%= post.content %><%= post.impressionist_count %></p>
 
 
                 <% if user_signed_in? %>

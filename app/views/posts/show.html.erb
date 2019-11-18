@@ -17,7 +17,7 @@
     </div>
   </div>
 </div>
-
+<%= time_ago_in_words(@post.created_at) %>
 
 
 <%= render @post.comments %>
