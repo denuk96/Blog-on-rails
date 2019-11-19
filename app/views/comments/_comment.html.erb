@@ -1,16 +1,25 @@
-<h2>Comments</h2>
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter_name %>
-</p>
+<div class="coments">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card text-center">
+        <h2>Comments</h2>
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.comment %>
-</p>
+        <p class="field">
+          <strong>Commenter:</strong>
+          <%= comment.commenter_name %>
+        </p>
 
-<p>
-  <%= link_to 'Destroy Comment', [comment.post, comment],
+        <p class="field">
+          <strong>Comment:</strong>
+          <%= comment.comment %>
+          </p>
+
+          <p>
+              <%= link_to 'Destroy Comment', [comment.post, comment],
               method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-</p>
+              data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-danger' %>
+          </p>
+       </div>
+    </div>
+  </div>
+</div>

@@ -1,32 +1,26 @@
 class PostsController < ApplicationController
   # Devise
   before_action :authenticate_user!, except: [:index, :show]
-  #impressionist
+  # impressionist
   impressionist :actions=>[:show]
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
 
 
   def index
     @posts = Post.all.order("created_at DESC")
   end
 
-
   def show
-    #impressionist
-    impressionist(@post) # 2nd argument is optional
+    # impressionist
+    impressionist(@post)
   end
-
 
   def new
     @post = Post.new
   end
 
-
-  def edit
-  end
-
+  def edit; end
 
   def create
     # check signed
@@ -46,12 +40,11 @@ class PostsController < ApplicationController
 
     else
       respond_to do |format|
-      format.html { redirect_to posts_url, alert: 'You should log in or sing up' }
+        format.html { redirect_to posts_url, alert: 'You should log in or sing up' }
       end
     end
 
   end
-
 
   def update
     respond_to do |format|
@@ -65,32 +58,32 @@ class PostsController < ApplicationController
     end
   end
 
-
   def destroy
     # only for 'admin = true' allowed
-      if current_user.admin == true
+    if current_user.admin == true
       @post.destroy
 
       respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-        format.json { head :no_content }
+          format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+          format.json { head :no_content }
         end
-      else
-        respond_to do |format|
+    else
+      respond_to do |format|
         format.html { redirect_to posts_url, notice: 'Only for admins allowed' }
-        end
       end
+    end
 
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:name, :title, :content, :author_id, :picture)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:name, :title, :content, :author_id, :picture)
+  end
 end

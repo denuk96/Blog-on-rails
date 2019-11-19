@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field"%>
     <%= form.label :name %>
     <%= form.text_field :name, class:'form-control' %>
   </div>
@@ -26,16 +26,22 @@
     <%= form.text_area :content, class:'form-control' %>
   </div>
 
-  <div class="dropdown">
-    <%= form.collection_select(:author_id, Author.all, :id, :full_name, class:'form-control', prompt:'choose author' ) %>
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.collection_select(:author_id, Author.all, :id, :full_name, {}, class: "form-control")%>
+  </div>
+   <div class="field">
+    <div>
+      <label class="btn btn-outline-dark btn-block">
+        Add background
+        <span style="display:none;">
+          <%= form.file_field :picture %>
+        </span>
+      </label>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :picture %>
-    <%= form.file_field :picture %>
-  </div>
-
-  <div class="actions">
+  <div class="field">
     <%= form.submit class:'btn btn-info btn-lg btn-block' %>
   </div>
 <% end %>
