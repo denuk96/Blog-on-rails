@@ -1,14 +1,13 @@
 class PostsController < ApplicationController
   # Devise
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   # impressionist
-  impressionist :actions=>[:show]
+  impressionist actions: [:show]
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all.order('created_at DESC')
   end
 
   def show
@@ -63,8 +62,8 @@ class PostsController < ApplicationController
       @post.destroy
 
       respond_to do |format|
-          format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-          format.json { head :no_content }
+        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+        format.json { head :no_content }
       end
     else
       respond_to do |format|
@@ -82,6 +81,6 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:name, :title, :content, :author_id, :picture)
+    params.require(:post).permit(:title, :content, :author_id, :picture)
   end
 end
