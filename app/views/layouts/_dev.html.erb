@@ -1,0 +1,16 @@
+<div class="classDev">
+  <% if user_signed_in? %>
+    <% if current_user.admin == true %>
+    <% else %>
+      <div class="alert alert-primary" role="alert">
+        To get admin`s rights(edit, destroy) - admin@example.com, password 'blabla' <br>
+        SQL isn`t ignored=) This message will disappear)
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-primary" role="alert">
+      To get admin`s rights(edit, destroy) - admin@example.com, password: 'blabla'<br>
+      SQL isn`t ignored=) This message will disappear)
+    </div>
+  <% end %>
+</div>

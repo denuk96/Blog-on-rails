@@ -7,7 +7,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title "><strong><%= @post.title %></strong></h5>
-    <p class="card-text"><%= @post.content %></p>
+    <p class="card-text"><%= sanitize @post.content %></p>
     <div class="btn-group" role="group" aria-label="Basic example">
       <% if user_signed_in? %>
         <% if current_user.admin == true %>

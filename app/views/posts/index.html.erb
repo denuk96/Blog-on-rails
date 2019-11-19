@@ -10,7 +10,7 @@
             <% end %>
           </h3>
           <div class="mb-1 text-muted"><%= fa_icon "calendar" %> <%= time_ago_in_words(post.created_at) %>        <%= fa_icon "eye" %> <%= post.impressionist_count %></div>
-          <p class="card-text mb-auto"><%=h truncate(post.content, :length => 150 ) %>  <%= link_to 'Read more', post %></p>
+          <p class="card-text mb-auto"><%=h truncate(sanitize post.content, :length => 150 ) %>  <%= link_to 'Read more', post %></p>
           <p>
 
           </p>

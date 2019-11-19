@@ -43,7 +43,6 @@ class PostsController < ApplicationController
         format.html { redirect_to posts_url, alert: 'You should log in or sing up' }
       end
     end
-
   end
 
   def update
@@ -66,13 +65,12 @@ class PostsController < ApplicationController
       respond_to do |format|
           format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
           format.json { head :no_content }
-        end
+      end
     else
       respond_to do |format|
         format.html { redirect_to posts_url, notice: 'Only for admins allowed' }
       end
     end
-
   end
 
   private
