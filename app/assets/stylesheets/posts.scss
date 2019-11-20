@@ -1,22 +1,27 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-h1 {
+h1, h2{
   text-align: center;
-
+}
+h3 {
+  font-size: 15px;
 }
 h5 {
   font-size: 30px;
 }
 
 img {
-  max-width: 200px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
+  width: 200px;
+  size: cover;
+}
+.index {
+  margin-bottom: 50px;
 }
 .fix_v {
-  max-height: 200px;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  height: 300px;
 }
 
 .btn {
@@ -37,4 +42,19 @@ img {
 }
 .card-text {
   text-align: left;
+}
+
+
+@media screen and (max-width: 1000px) {
+  img {
+    display: block;
+    size: cover;
+    width: 100%;
+    height: 100%;
+    width: 100px;
+    size: cover;
+  }
+  strong {
+    font-size: 15px;
+  }
 }

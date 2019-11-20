@@ -1,28 +1,31 @@
-<div class="row justify-content-center">
-  <div class="col-md-8">
-<div class="card text-center">
-  <img src="<%= rails_blob_url(@post.picture) %>" class="card-img-top" alt="...">
-  <div class="card-header">
-    By <span class="show_name"><%= @post.author.full_name %></span>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title "><strong><%= @post.title %></strong></h5>
-    <p class="card-text"><%= sanitize @post.content %></p>
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <% if user_signed_in? %>
-        <% if current_user.admin == true %>
-          <%= link_to 'Edit', edit_post_path(@post), class:'btn btn-outline-warning' %>
-          <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-outline-danger' %>
-        <% end %>
-      <% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card text-center">
+        <img src="<%= rails_blob_url(@post.picture) %>" class="card-img-top" alt="...">
+        <div class="card-header">
+          By <span class="show_name"><%= @post.author.full_name %></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title "><strong><%= @post.title %></strong></h5>
+          <p class="card-text"><%= sanitize @post.content %></p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <% if user_signed_in? %>
+              <% if current_user.admin == true %>
+                <%= link_to 'Edit', edit_post_path(@post), class:'btn btn-outline-warning' %>
+                <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-outline-danger' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %>        <%= fa_icon "eye" %> <%= @post.impressionist_count %>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card-footer text-muted">
-    <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %>        <%= fa_icon "eye" %> <%= @post.impressionist_count %>
-  </div>
-</div>
   </div>
 </div>
 
+<h2>Comments</h2>
 <%= render @post.comments %>
 <%= render 'comments/form' %>

@@ -1,42 +1,44 @@
-<%= form_for(@post) do |form| %>
-  <% if post.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="container">
+  <%= form_for(@post) do |form| %>
+    <% if post.errors.any? %>
+      <div class="alert alert-danger">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-        <% post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class:'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_area :content, class:'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :author %>
+      <%= form.collection_select(:author_id, Author.all, :id, :full_name, {}, class: "form-control")%>
+    </div>
+     <div class="field">
+      <div>
+        <label class="btn btn-outline-dark btn-block">
+          Add background
+          <span style="display:none;">
+            <%= form.file_field :picture %>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.submit class:'btn btn-info btn-lg btn-block' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, class:'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, class:'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.collection_select(:author_id, Author.all, :id, :full_name, {}, class: "form-control")%>
-  </div>
-   <div class="field">
-    <div>
-      <label class="btn btn-outline-dark btn-block">
-        Add background
-        <span style="display:none;">
-          <%= form.file_field :picture %>
-        </span>
-      </label>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.submit class:'btn btn-info btn-lg btn-block' %>
-  </div>
-<% end %>
+</div>
