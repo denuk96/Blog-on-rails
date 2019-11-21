@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  # Devise
-  before_action :authenticate_user!, except: %i[index show]
   # impressionist
   impressionist actions: [:show]
 
@@ -22,24 +20,15 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    # check signed
-    if user_signed_in?
+    @post = Post.new(post_params)
 
-      @post = Post.new(post_params)
-
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to @post, notice: 'Post was successfully created.' }
-          format.json { render :show, status: :created, location: @post }
-        else
-          format.html { render :new }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
-      end
-
-    else
-      respond_to do |format|
-        format.html { redirect_to posts_url, alert: 'You should log in or sing up' }
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,18 +46,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    # only for 'admin = true' allowed
-    if current_user.admin == true
-      @post.destroy
+    @post.destroy
 
-      respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Only for admins allowed' }
-      end
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
