@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   # impressionist
   impressionist actions: [:show]
 
+
   before_action :set_post, only: %i[show edit update destroy]
+
 
   def index
     @posts = Post.all.order('created_at DESC')
@@ -20,7 +22,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -60,6 +62,7 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params

@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :picture, dependent: :destroy
 
+  validates :author_id, presence: true
   validates :title, :content, :picture, presence: true,
                                         length: { minimum: 5 }
 
