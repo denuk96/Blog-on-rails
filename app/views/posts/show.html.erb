@@ -10,8 +10,12 @@
           <h5 class="card-title "><strong><%= @post.title %></strong></h5>
           <p class="card-text"><%= sanitize @post.content %></p>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <%= link_to 'Edit', edit_post_path(@post), class:'btn btn-outline-warning' %>
-            <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-outline-danger' %>
+            <% if current_user %>
+              <% if @post.author_id == @current_user.id or @current_user.admin == true %>
+                <%= link_to 'Edit', edit_post_path(@post), class:'btn btn-outline-warning' %>
+                <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-outline-danger' %>
+              <% end  %>
+            <% end  %>
           </div>
         </div>
         <div class="card-footer text-muted">

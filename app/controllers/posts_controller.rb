@@ -2,8 +2,11 @@ class PostsController < ApplicationController
   # impressionist
   impressionist actions: [:show]
 
-
+  before_action :require_login, only: %i[create edit update destroy]
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :owner, only: %i[edit update destroy]
+
+
 
 
   def index
@@ -22,6 +25,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
+
     @post = current_user.posts.build(post_params)
 
     respond_to do |format|
@@ -36,6 +40,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    if owner == false
+      redirect_to home_path
+    end
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -58,13 +65,20 @@ class PostsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end
 
+  # checking owner or not
+  def owner
+    if (@post.author_id == @current_user.id) || (@current_user.admin == true)
+    else
+      redirect_to login_path
+      # add some flash mess instead, dont forget
+      # ##################################
+    end
+  end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:title, :content, :author_id, :picture)
   end
