@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :require_login, only: %i[create edit update destroy]
-  before_action :find_post,     except: %i[edit update]
-  before_action :find_comment, except: %i[create    edit update]
+  before_action :find_post
+  before_action :find_comment, only: %i[show edit update]
+  before_action :owner, only: %i[edit update destroy]
 
   def create
     @comment = @post.comments.create(comment_params)
@@ -17,23 +18,16 @@ class CommentsController < ApplicationController
     end
   end
 
-########3#############################
-  def edit
-    post = Post.find(params[:post_id])
-    @comment = post.comments.find(params[:id])
-  end
+  def edit; end
 
   def update
-    post = Post.find(params[:post_id])
-    @comment = post.comments.find(params[:id])
-    if @comment.update_attributes(comment_params)
-      redirect_to post = Post.find(params[:post_id])
+    if @comment.update(comment_params)
+      redirect_to @post
     else
-      redirect_to home_path
+      render 'edit'
     end
   end
 
-##########################################
   def destroy
     @comment = @post.comments.find(params[:id])
     if (@current_user.id == @comment.author_id) || (@current_user.admin == true)
@@ -51,12 +45,21 @@ class CommentsController < ApplicationController
 
   private
 
+  def owner
+    if (@comment.author_id == @current_user.id) or (@current_user.admin == true)
+    else
+      redirect_to login_path
+      # add some flash mess instead, dont forget
+      # ##################################
+    end
+  end
+
   def find_post
     @post = Post.find(params[:post_id])
   end
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
   def comment_params

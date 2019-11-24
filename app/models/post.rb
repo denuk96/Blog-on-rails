@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :author
   has_many :comments, dependent: :destroy
-  ###???
+  # do I need this?)
   accepts_nested_attributes_for :comments
 
   has_one_attached :picture, dependent: :destroy

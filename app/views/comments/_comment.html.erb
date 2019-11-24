@@ -3,30 +3,24 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card text-center">
-
           <p class="field">
             <strong>Commenter:</strong>
             <%= comment.author.full_name  %>
           </p>
-
           <p class="field">
             <strong>Comment:</strong>
             <%= comment.comment %>
+            <% if updated(comment) %>
+            <p style="color:red; font-size: 30px"><strong>Edited!</strong></p>
+          <% end  %>
             </p>
             <p>
               <% if current_user %>
-                <% if @current_user.id == comment.author_id or @current_user.admin == true %>
+                <% if check_comment_rights(@current_user,comment) %>
                   <%= link_to 'Destroy Comment', [comment.post, comment],
                               method: :delete,
                               data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-danger' %>
-
-
-
                   <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
-
-
-
-
                 <% end  %>
               <% end  %>
             </p>
