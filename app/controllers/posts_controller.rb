@@ -40,11 +40,11 @@ class PostsController < ApplicationController
   end
 
   def update
-    if owner == false
-      redirect_to home_path
-    end
+    # If not a owner/admin - you cant edit/destroy
+    redirect_to home_path if owner == false
+
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update_attributes(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else

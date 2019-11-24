@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :author
   has_many :comments, dependent: :destroy
+  ###???
+  accepts_nested_attributes_for :comments
+
   has_one_attached :picture, dependent: :destroy
 
   validates :author_id, presence: true

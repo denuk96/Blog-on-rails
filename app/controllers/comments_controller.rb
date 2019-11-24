@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :require_login, only: %i[create edit update destroy]
-  before_action :find_post
-  # before_action :owner, only: %i[destroy]
+  before_action :find_post,     except: %i[edit update]
+  before_action :find_comment, except: %i[create    edit update]
 
   def create
     @comment = @post.comments.create(comment_params)
@@ -9,19 +9,36 @@ class CommentsController < ApplicationController
     respond_to do |format|
       #dev, del later
       # ##############
-    if @comment.save
-      format.html { redirect_to @post, notice: 'good' }
-    else
-      format.html { redirect_to @post, notice: 'bad' }
-      end
+      if @comment.save
+        format.html { redirect_to @post, notice: 'good' }
+      else
+        format.html { redirect_to @post, notice: 'bad' }
+        end
     end
   end
 
+########3#############################
+  def edit
+    post = Post.find(params[:post_id])
+    @comment = post.comments.find(params[:id])
+  end
+
+  def update
+    post = Post.find(params[:post_id])
+    @comment = post.comments.find(params[:id])
+    if @comment.update_attributes(comment_params)
+      redirect_to post = Post.find(params[:post_id])
+    else
+      redirect_to home_path
+    end
+  end
+
+##########################################
   def destroy
     @comment = @post.comments.find(params[:id])
     if (@current_user.id == @comment.author_id) || (@current_user.admin == true)
-    @comment.destroy
-    redirect_to post_path(@post)
+      @comment.destroy
+      redirect_to post_path(@post)
       #add mess
       # #############
     else
@@ -38,8 +55,12 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
+  def find_comment
+    @comment = Comment.find(params[:id])
+  end
+
   def comment_params
-    params.require(:comment).permit(:comment, :author_id, :commenter_name)
+    params.require(:comment).permit(:comment, :author_id, :commenter_name, :post_id)
   end
 
 end

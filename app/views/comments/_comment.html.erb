@@ -13,13 +13,20 @@
             <strong>Comment:</strong>
             <%= comment.comment %>
             </p>
-
             <p>
               <% if current_user %>
                 <% if @current_user.id == comment.author_id or @current_user.admin == true %>
                   <%= link_to 'Destroy Comment', [comment.post, comment],
                               method: :delete,
                               data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-danger' %>
+
+
+
+                  <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
+
+
+
+
                 <% end  %>
               <% end  %>
             </p>
@@ -28,8 +35,3 @@
     </div>
   </div>
 </div>
-
-<%# if @post.author_id == @current_user.id or @current_user.admin == true %>
-  <%#= link_to 'Edit', edit_post_path(@post), class:'btn btn-outline-warning' %>
-  <%#= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-outline-danger' %>
-<%# end  %>

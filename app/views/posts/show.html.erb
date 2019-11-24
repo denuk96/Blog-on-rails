@@ -19,6 +19,11 @@
           </div>
         </div>
         <div class="card-footer text-muted">
+
+          <% if updated(@post) %>
+            <p><strong>UPDATED!!!!!!</strong></p>
+          <% end  %>
+
           <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %>        <%= fa_icon "eye" %> <%= @post.impressionist_count %>
         </div>
       </div>
@@ -29,5 +34,3 @@
 <h2>Comments</h2>
 <%= render @post.comments %>
 <%= render 'comments/form' %>
-<%# if user_signed_in? %>
-<%# if current_user.admin == true %>
