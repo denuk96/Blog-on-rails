@@ -15,6 +15,14 @@
     <script>alert('You are not log in. Plz log in or register');</script>
   <% end %>
   <%#= debug(params) if Rails.env.development? %>
+
+  <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+
+
+
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
     <%= render 'layouts/header' %>
