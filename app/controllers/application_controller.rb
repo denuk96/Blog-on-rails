@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
+  before_action :unloged
 
 
   def current_user
@@ -25,6 +26,14 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
-  #####################
 
+  # offer to sing up/log in
+  def unloged
+    cookies[:actions] = if cookies[:actions]
+                          cookies[:actions].to_i + 1
+                        else
+                          0
+                        end
+  end
+ 
 end
