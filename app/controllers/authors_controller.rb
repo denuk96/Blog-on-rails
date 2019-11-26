@@ -19,7 +19,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       if @author.save
-        format.html { redirect_to @author, notice: 'User was successfully created.' }
+        format.html { redirect_to login_path, notice: 'Welcome aboard! Now you can log in!' }
         format.json { render :show, status: :created, location: @author }
       else
         format.html { render :new }

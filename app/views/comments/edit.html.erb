@@ -1,6 +1,7 @@
+<div class="container">
 <%= form_for([@post, @comment]) do |form| %>
   <% if @comment.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
       <ul>
@@ -15,10 +16,10 @@
       <%= form.text_area :comment, class:'form-control' %>
     </p>
     <p>
-      <%= form.submit class:'btn btn-info btn-lg' %>
+      <%= form.submit class:'btn btn-info btn-lg btn-block' %>
     </p>
   <% end %>
 
-<%= link_to 'show', [@comment.post, @comment]%>
+</div>
 
 

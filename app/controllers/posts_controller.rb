@@ -7,16 +7,13 @@ class PostsController < ApplicationController
   before_action :owner, only: %i[edit update destroy]
 
 
-
-
-
   def index
-   @posts = Post.all.order('created_at DESC')
-   if params[:search]
-     @posts = Post.search(params[:search]).order("created_at DESC")
-   else
-     @posts = Post.all.order('created_at DESC')
-   end
+    @posts = Post.all.order('created_at DESC')
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.all.order('created_at DESC')
+    end
 
   end
 
@@ -80,9 +77,9 @@ class PostsController < ApplicationController
   def owner
     if (@post.author_id == @current_user.id) || (@current_user.admin == true)
     else
-      redirect_to login_path
-      # add some flash mess instead, dont forget
-      # ##################################
+      respond_to do |format|
+        format.html { redirect_to posts_url, alert: 'Rights error' }
+      end
     end
   end
 

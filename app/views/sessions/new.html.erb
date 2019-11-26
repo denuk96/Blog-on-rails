@@ -1,40 +1,18 @@
-<h1>Sessions#new</h1>
-<div>
-
-<!--  <div class="row">-->
-<!--    <div class="col-md-6 col-md-offset-3">-->
-      <%#= form_for(:session, url: login_path) do |f| %>
-
-        <%#= f.label :email %>
-        <%#= f.email_field :email, class: 'form-control' %>
-
-        <%#= f.label :password %>
-        <%#= f.password_field :password, class: 'form-control' %>
-
-        <%#= f.submit "Log in", class: "btn btn-primary" %>
-      <%# end %>
-
-<!--      <p>New user? <%#= link_to "Sign up now!", signup_path %></p>-->
-<!--    </div>-->
-<!--  </div>-->
-
-
-
-
-  <p id='alert'><%= alert %></p>
+<div class="container">
   <h1>Login</h1>
   <%= form_tag sessions_path do |form| %>
-    <div class='field'>
-      <%= label_tag :email %>
-      <%= text_field_tag :email %>
+    <div class='form-group row justify-content-centre'>
+      <%= label_tag :email , "Email", :class =>""%>
+      <%= text_field_tag :email , nil, :class => "form-control" %>
     </div>
-    <div class='field'>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
+    <div class='form-group row'>
+      <%= label_tag :password, "Password", :class =>"" %>
+      <%= password_field_tag :password , nil, :class => "form-control" %>
     </div>
-    <div class='actions'>
-      <%= submit_tag 'Login' %>
+    <br><br>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <%= submit_tag 'Login', :class => "btn btn-primary" %>
+      <%= link_to 'Back', posts_path , class:"btn btn-outline-primary"%>
     </div>
   <% end %>
 </div>
-

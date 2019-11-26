@@ -11,18 +11,13 @@
 
   </head>
   <body>
-
   <% if pop_up and current_user == nil %>
-    <script>alert('You are not log in. Plz log in or register');</script>
+    <script>alert('Please, sing up or log in');</script>
   <% end %>
-<!--        <p class="notice"><%#= notice %></p>-->
-<!--        <p class="alert"><%#= alert %></p>-->
-
     <%= render 'layouts/header' %>
-    <%= render 'layouts/search' %>
+    <%= render 'layouts/messages' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
     <%= render 'layouts/dev' %>
-
   </body>
 </html>

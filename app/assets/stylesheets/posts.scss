@@ -39,10 +39,17 @@ img {
 }
 .show_name {
   font-style: italic;
+  font-size: 20px;
 }
 .card-text {
   text-align: left;
 }
+
+.search {
+  text-align: center;
+  font-size: 30px;
+}
+
 
 
 @media screen and (max-width: 1000px) {

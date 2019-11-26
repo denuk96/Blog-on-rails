@@ -1,32 +1,32 @@
 <header class="header">
   <div class="container">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <h4 class="my-0 mr-md-auto font-weight-normal">Blog on Rails</h4>
-      <nav class="my-2 my-md-0 mr-md-3">
-        <%= link_to 'Home', posts_path, class: 'btn btn-primary' %>
-
-
-        <% if current_user %>
-          <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
-          Logged in as <%= current_user.full_name %>.
-          <%= link_to 'Log Out', logout_path %>
-        <% else %>
-          <%= link_to 'Sign Up', signup_path %> or
-          <%= link_to 'Log In', login_path %>
+      <div class="form-inline ">
+        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:'form-control' %>
+          <%= submit_tag "Search", class:'btn btn-info' %>
         <% end %>
 
+      </div>
+      <nav class="my-2 my-md-0 mr-md-3">
 
+
+        <%= link_to 'Home', posts_path, class: 'btn btn-primary' %>
+        <% if current_user %>
+          <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+          <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
+        <% else %>
+          <%= link_to 'Sign Up', signup_path, class: 'btn btn-outline-primary'  %>
+          <%= link_to 'Log In', login_path, class: 'btn btn-outline-primary'  %>
+        <% end %>
 
       </nav>
-<!--              регистрация-->
+
     </div>
   </div>
 </header>
 
-<%#= link_to 'New Post', new_post_path, class: 'btn btn-primary disabled' %>
-<%# if user_signed_in? %>
-<%#= link_to 'Log out', destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
-<%# else %>
-<%#= link_to 'Log in', new_user_session_path, class: 'btn btn-outline-primary' %>
-<%#= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-primary' %>
-<%# end %>
+
+
+

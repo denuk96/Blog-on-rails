@@ -4,23 +4,25 @@
       <div class="col-md-6">
         <div class="card text-center">
           <p class="field">
-            <strong>Commenter:</strong>
-            <%= comment.author.full_name  %>
+            By
+            <strong><%= comment.author.full_name  %></strong> <br>
+           <span class="com_created"> Left <%= time_ago_in_words(comment.created_at) %> ago..</span>
           </p>
           <p class="field">
-            <strong>Comment:</strong>
-            <%= comment.comment %>
+            "<%= comment.comment %>"
             <% if updated(comment) %>
-            <p style="color:red; font-size: 30px"><strong>Edited!</strong></p>
+            <p class="updated" italic">Edited <%= time_ago_in_words(comment.updated_at) %> ago..</p>
           <% end  %>
             </p>
             <p>
               <% if current_user %>
                 <% if check_comment_rights(@current_user,comment) %>
-                  <%= link_to 'Destroy Comment', [comment.post, comment],
-                              method: :delete,
-                              data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-danger' %>
-                  <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary' %>
+                    <%= link_to 'Destroy Comment', [comment.post, comment],
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-secondary' %>
+                  </div>
                 <% end  %>
               <% end  %>
             </p>
