@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
-
   helper_method :current_user, :logged_in?
   before_action :unloged
-
 
   def current_user
     if session[:author_id]
@@ -35,5 +33,4 @@ class ApplicationController < ActionController::Base
                           0
                         end
   end
- 
 end

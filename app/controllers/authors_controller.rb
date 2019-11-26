@@ -1,18 +1,16 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :set_author, only: %i[show edit update destroy]
   def index
     @author = Author.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @author = Author.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @author = Author.new(author_params)
@@ -48,7 +46,7 @@ class AuthorsController < ApplicationController
     end
   end
 
-    private
+  private
 
   def set_author
     @author = Author.find(params[:id])
@@ -58,4 +56,3 @@ class AuthorsController < ApplicationController
     params.require(:author).permit(:email, :password, :password_confirmation, :first_name, :last_name)
   end
 end
-

@@ -6,15 +6,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :owner, only: %i[edit update destroy]
 
-
   def index
     @posts = Post.all.order('created_at DESC')
-    if params[:search]
-      @posts = Post.search(params[:search]).order("created_at DESC")
-    else
-      @posts = Post.all.order('created_at DESC')
-    end
-
+    @posts = if params[:search]
+               Post.search(params[:search]).order('created_at DESC')
+             else
+               Post.all.order('created_at DESC')
+             end
   end
 
   def show
@@ -29,7 +27,6 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-
     @post = current_user.posts.build(post_params)
 
     respond_to do |format|

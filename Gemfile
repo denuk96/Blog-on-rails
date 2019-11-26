@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # My gems
 gem 'bootstrap', '~> 4.3.1'
 gem 'faker', '~> 2.7'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'impressionist'
 gem 'jquery-rails'
 gem 'rubocop', '~> 0.76.0', require: false
