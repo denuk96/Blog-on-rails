@@ -7,16 +7,14 @@
           <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:'form-control' %>
           <%= submit_tag "Search", class:'btn btn-info' %>
         <% end %>
-
       </div>
       <nav class="my-2 my-md-0 mr-md-3">
-
-
         <%= link_to 'Home', posts_path, class: 'btn btn-primary' %>
         <% if current_user %>
           <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
           <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
         <% else %>
+          <button type="button" class="btn btn-primary" disabled>New Post</button>
           <%= link_to 'Sign Up', signup_path, class: 'btn btn-outline-primary'  %>
           <%= link_to 'Log In', login_path, class: 'btn btn-outline-primary'  %>
         <% end %>

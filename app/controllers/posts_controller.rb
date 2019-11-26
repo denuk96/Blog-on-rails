@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  # Парень, если ты копируешь всё подряд, то не копируй хотя бы мои
+  # нелепые коментарии и название комитов, я тоже умею юзать гит)
+  # а то выглядит нелепо..
+  # P.S: админа тоже не обезательно приделывать)
+
   # impressionist
   impressionist actions: [:show]
 
@@ -72,7 +77,7 @@ class PostsController < ApplicationController
 
   # checking owner or not
   def owner
-    if (@post.author_id == @current_user.id) || (@current_user.admin == true)
+    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601) or (@current_user.admin == true)
     else
       respond_to do |format|
         format.html { redirect_to posts_url, alert: 'Rights error' }
