@@ -14,17 +14,13 @@
           <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
           <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
         <% else %>
-          <button type="button" class="btn btn-primary" disabled>New Post</button>
+          <button type="button" class="btn btn-primary" disabled data-toggle="tooltip" data-placement="top" title="Sign up or log in to create posts">
+            New Post
+          </button>
           <%= link_to 'Sign Up', signup_path, class: 'btn btn-outline-primary'  %>
           <%= link_to 'Log In', login_path, class: 'btn btn-outline-primary'  %>
         <% end %>
-
       </nav>
-
     </div>
   </div>
 </header>
-
-
-
-

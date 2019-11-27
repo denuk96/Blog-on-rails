@@ -12,9 +12,11 @@
                     <strong><%= post.title %></strong>
                   <% end %>
                 </h3>
-                <div class="mb-1 text-muted"> <span data-toggle="tooltip" data-placement="top" title="(<%=post.created_at  %>)">
+                <div class="mb-1 text-muted"> <span data-toggle="tooltip" data-placement="top" title="(<%=post.created_at %>)">
                  <%= fa_icon "calendar" %> <%= time_ago_in_words(post.created_at) %>
-                 </span>  <%= fa_icon "eye" %> <%= post.impressionist_count %></div>
+                 </span>  <span data-toggle="tooltip" data-placement="top" title="Uniq(<%= post.impressionist_count(:filter=>:ip_address) %>)">
+                 <%= fa_icon "eye" %> <%= post.impressionist_count %>
+                 </span> <%= fa_icon "comment" %> <%= post.comments.count  %></div>
                 <p class="card-text mb-auto"><%=h truncate(post.content, :length => 100 ) %>  <%= link_to 'Read more', post %></p>            </div>
               <div class="img"><img src= <%= rails_blob_url(post.picture) %>></div>
             </div>
@@ -28,5 +30,3 @@
     </div>
   </div>
 </div>
-
-

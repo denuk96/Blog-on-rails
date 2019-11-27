@@ -77,7 +77,7 @@ class PostsController < ApplicationController
 
   # checking owner or not
   def owner
-    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601) or (@current_user.admin == true)
+    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601) || (@current_user.admin == true)
     else
       respond_to do |format|
         format.html { redirect_to posts_url, alert: 'Rights error' }

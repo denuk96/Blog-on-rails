@@ -26,7 +26,9 @@
         </div>
                 <div class="card-footer text-muted">
           <span data-toggle="tooltip" data-placement="top" title="(<%= @post.created_at %>)">
-                 <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %> <%= fa_icon "eye" %> <%= @post.impressionist_count %>
+                 <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %> <span data-toggle="tooltip" data-placement="top" title="Uniq:(<%= @post.impressionist_count(:filter=>:ip_address) %>)">
+                 <%= fa_icon "eye" %> <%= @post.impressionist_count %>
+                 </span>
         </div>
       </div>
     </div>
