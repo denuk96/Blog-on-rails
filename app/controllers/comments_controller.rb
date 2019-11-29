@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
-        format.html { redirect_to @post, alert: 'Smth went wrong..' }
+        format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
       end
     end
   end

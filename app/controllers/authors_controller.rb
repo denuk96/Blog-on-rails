@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: %i[show edit update destroy]
+
   def index
     @author = Author.all
   end
@@ -18,10 +19,8 @@ class AuthorsController < ApplicationController
     respond_to do |format|
       if @author.save
         format.html { redirect_to login_path, notice: 'Welcome aboard! Now you can log in!' }
-        format.json { render :show, status: :created, location: @author }
       else
         format.html { render :new }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -30,10 +29,8 @@ class AuthorsController < ApplicationController
     respond_to do |format|
       if @author.update(author_params)
         format.html { redirect_to @author, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :edit }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end
   end
