@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  author_id  :integer
+#  ancestry   :string
 #
 
 require 'test_helper'

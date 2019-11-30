@@ -4,6 +4,15 @@ class CommentsController < ApplicationController
   before_action :find_comment, only: %i[show edit update destroy]
   before_action :owner, only: %i[edit update destroy]
 
+  def index
+    @post.comments = @post.comments.arrange(order: :created_at)
+  end
+
+  def new
+    # ancestry
+    @comment = Comment.new(parent_id: params[:parent_id])
+  end
+
   def create
     @comment = @post.comments.create(comment_params)
     @comment.author_id = current_user.id
@@ -58,6 +67,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:comment, :author_id, :post_id)
+    params.require(:comment).permit(:comment, :author_id, :post_id, :parent_id)
   end
 end

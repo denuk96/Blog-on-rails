@@ -8,9 +8,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  author_id  :integer
+#  ancestry   :string
 #
 
 class Comment < ApplicationRecord
+  # ancestry gem
+  has_ancestry
+
   belongs_to :post
   belongs_to :author
   validates  :comment, presence: true

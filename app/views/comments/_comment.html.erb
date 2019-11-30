@@ -1,11 +1,11 @@
 <div class="container">
   <div class="coments">
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="card text-center">
           <p class="field">
-            By
-            <strong><%= comment.author.full_name  %></strong> <br>
+            By <strong><%= comment.author.full_name  %></strong> <br>
+
            <span class="com_created"> Left  <span data-toggle="tooltip" data-placement="top" title="(<%=comment.created_at  %>)">
               <%= time_ago_in_words(comment.created_at) %>
             </span> ago..</span>
@@ -20,6 +20,11 @@
             </p>
             <p>
               <% if current_user %>
+
+<!--                # ancestry-->-->
+                <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id), class:'btn btn-sm btn-outline-secondary' %>
+
+
                 <% if check_edit_rights(@current_user,comment) %>
                   <div class="btn-group" role="group" aria-label="Basic example">
                     <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary' %>
