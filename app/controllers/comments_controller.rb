@@ -16,11 +16,18 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.create(comment_params)
     @comment.author_id = current_user.id
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
-      else
-        format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
+    # next code limits the level of nested comments to 5
+    if @comment.ancestors.count <= 4
+      respond_to do |format|
+        if @comment.save
+          format.html { redirect_to @post, notice: 'Comment was successfully created.' }
+        else
+          format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @post, alert: 'To much comments in one tree (5 comments max)' }
       end
     end
   end

@@ -14,7 +14,7 @@ module ApplicationHelper
     true if cookies[:actions] % 5 == 0
   end
 
-  # nesting
+  # sort nested comments
   def nested_comments(comments)
     comments.map do |comment, sub_comments|
       render(comment) + content_tag(:div, nested_comments(sub_comments), :class => 'nested_comments')
