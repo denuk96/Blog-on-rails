@@ -18,5 +18,6 @@ class Comment < ApplicationRecord
 
   belongs_to :post
   belongs_to :author
-  validates  :comment, presence: true
+  has_many :likes, dependent: :destroy
+  validates :comment, presence: true
 end

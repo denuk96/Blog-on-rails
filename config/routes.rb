@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+
   root 'posts#index', as: 'home'
+
   resources :posts
 
   resources :posts do
-    resources :comments
+    resources :comments do
+      resources :likes
+    end
   end
+
 
   resources :authors
   resources :sessions, only: %i[new create destroy]
