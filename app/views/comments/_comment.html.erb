@@ -20,12 +20,12 @@
             <p>
           <p><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></p>
               <% if current_user %>
-                <%= link_to 'Like', post_comment_likes_path(@post, comment), method: :post, class: 'btn btn-success btn-sm' %>
 
 
+                <%= link_to 'Like', post_comment_likes_path(@post, comment),:value => 1,method: :post, class: 'btn btn-success btn-sm' %>
+
+            
                 <div class="btn-group" role="group" aria-label="Basic example">
-
-
                   <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id), class:'btn btn-sm btn-outline-secondary' %>
                   <% if check_edit_rights(@current_user,comment) %>
                       <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary' %>

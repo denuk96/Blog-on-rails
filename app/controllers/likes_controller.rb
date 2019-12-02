@@ -27,5 +27,4 @@ class LikesController < ApplicationController
         params[:comment_id]).exists?
   end
 
-
 end
