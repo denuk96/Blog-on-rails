@@ -17,6 +17,8 @@
 class Author < ApplicationRecord
   has_secure_password
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password_digest, presence: true,
+                              length: { minimum: 8 }
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy

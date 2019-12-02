@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :owner, only: %i[edit update destroy]
 
-  before_action :banned?
+
 
   def index
 
@@ -80,12 +80,6 @@ class PostsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to posts_url, alert: 'Rights error' }
       end
-    end
-  end
-
-  def banned?
-    if @current_user.banned == true
-      flash[:alert] = 'blabla'
     end
   end
 

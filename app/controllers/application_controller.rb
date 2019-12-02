@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
   before_action :unloged
-
+  before_action :banned?
 
   def current_user
     if session[:author_id]
@@ -33,6 +33,15 @@ class ApplicationController < ActionController::Base
                         else
                           0
                         end
+  end
+
+  # check banned or not
+  def banned?
+    if current_user.present?
+      if current_user.banned == true
+        flash[:alert] = 'Your are theoretically banned'
+      end
+    end
   end
 
 
