@@ -11,8 +11,10 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <%= link_to 'Home', posts_path, class: 'btn btn-primary' %>
         <% if current_user %>
-          <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
-          <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
+          <% if @current_user.banned == false  %>
+            <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+          <% end %>
+            <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
         <% else %>
           <button type="button" class="btn btn-primary" disabled data-toggle="tooltip" data-placement="top" title="Sign up or log in to create posts">
             New Post

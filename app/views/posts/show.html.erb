@@ -40,8 +40,17 @@
 
 <h2>Comments</h2>
 <%= nested_comments @post.comments.arrange(order: :created_at)  %>
-<% if current_user %>
-  <%= render 'comments/form' %>
+<% if current_user  %>
+  <% if @current_user.banned == false  %>
+    <%= render 'comments/form' %>
+  <% else %>
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+        You have no rights to leave comments
+        <br>
+      </div>
+    </div>
+  <% end  %>
 <% else %>
   <div class="container">
     <div class="alert alert-warning" role="alert">
