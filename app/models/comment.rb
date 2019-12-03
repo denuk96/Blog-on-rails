@@ -4,10 +4,10 @@
 #
 #  id             :bigint           not null, primary key
 #  comment        :text
-#  post_id        :integer          not null
+#  post_id        :bigint           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  author_id      :integer
+#  author_id      :bigint
 #  ancestry       :string
 #  ancestry_depth :integer          default(0)
 #

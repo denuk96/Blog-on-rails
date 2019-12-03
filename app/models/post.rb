@@ -7,7 +7,7 @@
 #  content    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  author_id  :integer
+#  author_id  :bigint
 #
 
 class Post < ApplicationRecord

@@ -12,6 +12,7 @@
 #  email           :string
 #  password_digest :string
 #  admin           :boolean          default(FALSE)
+#  banned          :boolean          default(FALSE)
 #
 
 require 'test_helper'
