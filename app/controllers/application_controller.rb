@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   def banned?
     if current_user.present?
       if current_user.banned == true
-        flash[:alert] = 'Your are theoretically banned'
+        flash[:alert] = 'Your are not allowed to create comments or posts. (banned)'
       end
     end
   end

@@ -39,12 +39,7 @@
 </div>
 
 <h2>Comments</h2>
-<%#= render @post.comments %>
-
-
 <%= nested_comments @post.comments.arrange(order: :created_at)  %>
-
-
 <% if current_user %>
   <%= render 'comments/form' %>
 <% else %>

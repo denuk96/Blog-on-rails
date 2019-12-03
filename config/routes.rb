@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments do
       resources :likes
+      post '/dislikes' => 'likes#dislike', as: :dislike_create
     end
   end
+
+
 
 
   resources :authors

@@ -30,16 +30,19 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = current_user.posts.build(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if @current_user.banned == false
+      @post = current_user.posts.build(post_params)
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to home_path, notice: 'Aborted. You are banned.'
     end
   end
 
@@ -75,7 +78,7 @@ class PostsController < ApplicationController
 
   # checking owner or not
   def owner
-    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601) || (@current_user.admin == true)
+    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601 && @current_user.banned == false) || (@current_user.admin == true)
     else
       respond_to do |format|
         format.html { redirect_to posts_url, alert: 'Rights error' }

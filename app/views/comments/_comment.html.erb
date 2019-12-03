@@ -4,7 +4,19 @@
       <div class="col-md-8">
         <div class="card text-center">
           <p class="field">
-            By <strong><%= comment.author.full_name  %></strong> <br>
+            <% if current_user %>
+              <% pre_like = comment.likes.find { |like| like.author_id == current_user.id} %>
+            <% end %>
+            <% if current_user and pre_like == nil %>
+              <%= link_to '↑', post_comment_likes_path(@post, comment),method: :post, class: 'badge badge-primary ' %>
+              <strong><%= count_rating(comment.likes)%></strong>
+              <%= link_to '↓', post_comment_dislike_create_path(@post, comment),method: :post, class: 'badge badge-danger' %>
+            <% elsif   %>
+              <span class="badge badge-light disabled">↑</span>
+              <strong><%= count_rating(comment.likes)%></strong>
+              <span class="badge badge-light disabled">↓</span>
+            <% end %>
+          By <strong><%= comment.author.full_name  %></strong> <br>
            <span class="com_created"> Left  <span data-toggle="tooltip" data-placement="top" title="(<%=comment.created_at  %>)">
               <%= time_ago_in_words(comment.created_at) %>
             </span> ago..</span>
@@ -17,14 +29,8 @@
               </span> ago..</p>
              <% end  %>
           </p>
-            <p>
-          <p><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+          <p>
               <% if current_user %>
-
-
-                <%= link_to 'Like', post_comment_likes_path(@post, comment),:value => 1,method: :post, class: 'btn btn-success btn-sm' %>
-
-            
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id), class:'btn btn-sm btn-outline-secondary' %>
                   <% if check_edit_rights(@current_user,comment) %>
@@ -35,7 +41,7 @@
                   <% end  %>
                  </div>
               <% end  %>
-            </p>
+          </p>
          </div>
       </div>
     </div>

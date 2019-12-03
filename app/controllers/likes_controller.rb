@@ -4,9 +4,9 @@ class LikesController < ApplicationController
   def create
     @comment = Comment.find(params[:comment_id])
     if already_liked?
-      redirect_to @post
+      flash[:alert] = 'You have already liked'
     else
-      if @comment.likes.create!(author: current_user)
+      if @comment.likes.create!(author: current_user, value: 1)
         redirect_to @post
       else
         respond_to do |format|
@@ -15,6 +15,22 @@ class LikesController < ApplicationController
       end
     end
   end
+
+  def dislike
+    @comment = Comment.find(params[:comment_id])
+    if already_liked?
+      flash[:alert] = 'You have already liked'
+    else
+      if @comment.likes.create!(author: current_user, value: -1)
+        redirect_to @post
+      else
+        respond_to do |format|
+          format.html { redirect_to @post, alert: 'You have already voted' }
+        end
+      end
+    end
+  end
+
 
   private
 

@@ -14,21 +14,25 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @post.comments.create(comment_params)
-    @comment.author_id = current_user.id
-    # next code limits the level of nested comments to 5
-    if @comment.ancestors.count <= 4
-      respond_to do |format|
-        if @comment.save
-          format.html { redirect_to @post, notice: 'Comment was successfully created.' }
-        else
-          format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
+    if @current_user.banned == false
+      @comment = @post.comments.create(comment_params)
+      @comment.author_id = current_user.id
+      # next code limits the level of nested comments to 5
+      if @comment.ancestors.count <= 4
+        respond_to do |format|
+          if @comment.save
+            format.html { redirect_to @post, notice: 'Comment was successfully created.' }
+          else
+            format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
+          end
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @post, alert: 'To much comments in one tree (5 comments max)' }
         end
       end
     else
-      respond_to do |format|
-        format.html { redirect_to @post, alert: 'To much comments in one tree (5 comments max)' }
-      end
+      redirect_to home_path, notice: 'Aborted. You are banned.'
     end
   end
 
@@ -65,7 +69,7 @@ class CommentsController < ApplicationController
   end
 
   def owner
-    if @comment.author_id == @current_user.id || (@current_user.admin == true)
+    if (@comment.author_id == @current_user.id && @current_user.banned == false) || (@current_user.admin == true)
     else
       respond_to do |format|
         format.html { redirect_to @post, alert: 'You have no rights' }
