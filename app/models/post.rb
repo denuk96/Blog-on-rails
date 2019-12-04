@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   validates :title, uniqueness: { scope: :author_id }
 
   def self.search(search)
-    where("title LIKE ? OR content LIKE ?", "%#{search}%","%#{search}%")
+    where('title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%")
   end
 
   # impressionist

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   ActiveAdmin.routes(self)
   root 'posts#index', as: 'home'
 
@@ -11,9 +10,6 @@ Rails.application.routes.draw do
       post '/dislikes' => 'likes#dislike', as: :dislike_create
     end
   end
-
-
-
 
   resources :authors
   resources :sessions, only: %i[new create destroy]

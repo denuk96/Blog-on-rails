@@ -6,7 +6,9 @@ module ApplicationHelper
 
   # check owner or admin or not, time limit 1 hour
   def check_edit_rights(current_user, sample)
-    true if (current_user.id == sample.author_id && Time.now - sample.created_at < 3600 && current_user.banned == false) || (current_user.admin == true)
+    if (current_user.id == sample.author_id && Time.now - sample.created_at < 3600 && current_user.banned == false) || (current_user.admin == true)
+      true
+    end
   end
 
   # count actions
@@ -17,7 +19,7 @@ module ApplicationHelper
   # sort nested comments
   def nested_comments(comments)
     comments.map do |comment, sub_comments|
-      render(comment) + content_tag(:div, nested_comments(sub_comments), :class => 'nested_comments')
+      render(comment) + content_tag(:div, nested_comments(sub_comments), class: 'nested_comments')
     end.join.html_safe
   end
 end

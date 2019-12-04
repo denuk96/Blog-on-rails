@@ -31,7 +31,6 @@ class LikesController < ApplicationController
     end
   end
 
-
   private
 
   def find_post
@@ -42,5 +41,4 @@ class LikesController < ApplicationController
     Like.where(author_id: current_user.id, comment_id:
         params[:comment_id]).exists?
   end
-
 end

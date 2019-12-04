@@ -38,11 +38,7 @@ class ApplicationController < ActionController::Base
   # check banned or not
   def banned?
     if current_user.present?
-      if current_user.banned == true
-        flash[:alert] = 'Your are not allowed to create comments or posts. (banned)'
-      end
+      flash[:alert] = 'Your are not allowed to create comments or posts. (banned)' if current_user.banned == true
     end
   end
-
-
 end

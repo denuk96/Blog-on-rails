@@ -28,12 +28,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # My gems
 gem 'bootstrap', '~> 4.3.1'
 
+gem 'activeadmin'
 gem 'ancestry', '~> 3.0', '>= 3.0.7'
 gem 'font-awesome-rails'
 gem 'impressionist'
 gem 'jquery-rails'
 gem 'pg', '~> 1.1', '>= 1.1.4'
-gem 'activeadmin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
