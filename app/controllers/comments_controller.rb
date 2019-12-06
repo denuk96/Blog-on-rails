@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
   before_action :owner, only: %i[edit update destroy]
 
   def index
-    @post.comments = @post.comments.arrange(order: :created_at)
+    #@post.comments = @post.comments.arrange(order: :created_at)
+     @post.comments = @post.comments
   end
 
   def new
@@ -21,6 +22,7 @@ class CommentsController < ApplicationController
       if @comment.ancestors.count <= 4
         respond_to do |format|
           if @comment.save
+            format.js {render 'create', status: :created, location: @post}
             format.html { redirect_to @post, notice: 'Comment was successfully created.' }
           else
             format.html { redirect_to @post, alert: @comment.errors.full_messages.first }

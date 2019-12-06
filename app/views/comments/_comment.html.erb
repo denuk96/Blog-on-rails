@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="coments">
-    <div class="row justify-content-left">
+<div class="container" id="comments_block">
+  <div class="coments"  id="comment-<%= comment.id %>">
+    <div class="row justify-content-left ">
       <div class="col-md-8">
         <div class="card text-center">
           <p class="field">
@@ -11,12 +11,12 @@
               <%= link_to '↑', post_comment_likes_path(@post, comment),method: :post, class: 'badge badge-primary ' %>
               <strong><%= count_rating(comment.likes)%></strong>
               <%= link_to '↓', post_comment_dislike_create_path(@post, comment),method: :post, class: 'badge badge-danger' %>
-            <% elsif   %>
+            <% elsif %>
               <span class="badge badge-light disabled">↑</span>
               <strong><%= count_rating(comment.likes)%></strong>
               <span class="badge badge-light disabled">↓</span>
             <% end %>
-          By <strong><%= comment.author.full_name  %></strong> <br>
+            By <strong><%= comment.author.full_name  %></strong> <br>
            <span class="com_created"> Left  <span data-toggle="tooltip" data-placement="top" title="(<%=comment.created_at  %>)">
               <%= time_ago_in_words(comment.created_at) %>
             </span> ago..</span>
@@ -27,20 +27,20 @@
               <p class="updated" italic">Edited <span data-toggle="tooltip" data-placement="top" title="(<%=comment.updated_at  %>)">
                 <%= time_ago_in_words(comment.updated_at) %>
               </span> ago..</p>
-             <% end  %>
+             <% end %>
           </p>
           <p>
-              <% if current_user %>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id), class:'btn btn-sm btn-outline-secondary' %>
+            <% if current_user %>
+                <div class="btn-group" role="group" aria-label="Basic example" >
+                  <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id, js: true), remote: true, class:'btn btn-sm btn-outline-secondary' %>
                   <% if check_edit_rights(@current_user,comment) %>
-                      <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary' %>
+                      <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary ' %>
                       <%= link_to 'Destroy Comment', [comment.post, comment],
                                   method: :delete,
                                   data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-secondary' %>
                   <% end  %>
                  </div>
-              <% end  %>
+            <% end  %>
           </p>
          </div>
       </div>
