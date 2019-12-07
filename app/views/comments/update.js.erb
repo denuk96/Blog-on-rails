@@ -1,2 +1,2 @@
-$("#comment_comment, #hide_button_form, #hide_label_form").hide(500);
-$("#comment-<%=@comment.parent_id %>").append('<%= j render partial:'comments/comment', locals: {comment: @comment} %>').hide().show('500');
+$("#hide_edit").hide(500);
+$("#comment-<%= @comment.id %>").after('<%= j render partial:'comments/comment', locals: {comment: @comment} %>');
