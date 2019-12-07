@@ -14,7 +14,7 @@
 
 class Comment < ApplicationRecord
   # ancestry gem
-  has_ancestry
+  has_ancestry orphan_strategy: :adopt
 
   belongs_to :post
   belongs_to :author

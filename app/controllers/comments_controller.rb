@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
 
   def index
     #@post.comments = @post.comments.arrange(order: :created_at)
-     @post.comments = @post.comments
   end
 
   def new
@@ -38,11 +37,17 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js {render 'edit', status: :created, location: @post}
+    end
+  end
 
   def update
     respond_to do |format|
       if @comment.update(comment_params)
+        format.js
+        #format.js {render 'update', status: :created, location: @post}
         format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }
@@ -53,6 +58,7 @@ class CommentsController < ApplicationController
   def destroy
     respond_to do |format|
       if @comment.destroy
+        format.js {render 'destroy', status: :created, location: @post}
         format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }

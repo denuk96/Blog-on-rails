@@ -1,7 +1,7 @@
 <div class="col-md-8">
-  <%= form_with(model: [ @post, @post.comments.build ]) do |form| %>
+  <%= form_with(model: [ @post, @comment ]) do |form| %>
     <!--# ancestry-->
-    <%= form.hidden_field :parent_id, value: params[:parent_id] %>
+    <%= form.hidden_field :parent_id, value: @comment.ancestry %>
     <p>
       <%= form.label :comment, id:'hide_label_form' %><br>
       <%= form.text_area :comment, class:'form-control'%>

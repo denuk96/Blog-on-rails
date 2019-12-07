@@ -1,4 +1,4 @@
-<div class="container" id="comments_block">
+<div class="container">
   <div class="coments"  id="comment-<%= comment.id %>">
     <div class="row justify-content-left ">
       <div class="col-md-8">
@@ -34,8 +34,8 @@
                 <div class="btn-group" role="group" aria-label="Basic example" >
                   <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id, js: true), remote: true, class:'btn btn-sm btn-outline-secondary' %>
                   <% if check_edit_rights(@current_user,comment) %>
-                      <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class:'btn btn-sm btn-outline-secondary ' %>
-                      <%= link_to 'Destroy Comment', [comment.post, comment],
+                      <%= link_to "Edit", edit_post_comment_path(comment.post, comment), remote: true, class:'btn btn-sm btn-outline-secondary ' %>
+                      <%= link_to 'Destroy Comment', [comment.post, comment], remote: true,
                                   method: :delete,
                                   data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-secondary' %>
                   <% end  %>
