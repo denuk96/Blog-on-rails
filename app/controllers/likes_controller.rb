@@ -6,11 +6,11 @@ class LikesController < ApplicationController
     if already_liked?
       flash[:alert] = 'You have already liked'
     else
-      if @comment.likes.create!(author: current_user, value: 1)
-        redirect_to @post
-      else
-        respond_to do |format|
-          format.html { redirect_to @post, alert: 'You have already voted' }
+      respond_to do |format|
+        if @comment.likes.create!(author: current_user, value: 1)
+          format.js { render 'comments/like', status: :created, location: @post }
+        else
+          format.html { redirect_to @post, alert: 'You have already liked' }
         end
       end
     end
@@ -21,11 +21,11 @@ class LikesController < ApplicationController
     if already_liked?
       flash[:alert] = 'You have already liked'
     else
-      if @comment.likes.create!(author: current_user, value: -1)
-        redirect_to @post
-      else
-        respond_to do |format|
-          format.html { redirect_to @post, alert: 'You have already voted' }
+      respond_to do |format|
+        if @comment.likes.create!(author: current_user, value: -1)
+          format.js { render 'comments/like', status: :created, location: @post }
+        else
+          format.html { redirect_to @post, alert: 'You have already liked' }
         end
       end
     end

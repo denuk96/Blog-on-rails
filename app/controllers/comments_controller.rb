@@ -22,10 +22,10 @@ class CommentsController < ApplicationController
       if @comment.ancestors.count <= 4
         respond_to do |format|
           # next chooses js.erb for creating new comment or nested(reply)
-          if @comment.save && @comment.ancestry != nil
-            format.js {render 'create_reply', status: :created, location: @post}
-          elsif @comment.save && @comment.parent_id == nil
-            format.js {render 'create', status: :created, location: @post}
+          if @comment.save && !@comment.ancestry.nil?
+            format.js { render 'create_reply', status: :created, location: @post }
+          elsif @comment.save && @comment.parent_id.nil?
+            format.js { render 'create', status: :created, location: @post }
             format.html { redirect_to @post, notice: 'Comment was successfully created.' }
           else
             format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.js {render 'edit', status: :created, location: @post}
+      format.js { render 'edit', status: :created, location: @post }
     end
   end
 
@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         format.js
-        #format.js {render 'update', status: :created, location: @post}
+        # format.js {render 'update', status: :created, location: @post}
         format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }
@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
   def destroy
     respond_to do |format|
       if @comment.destroy
-        format.js {render 'destroy', status: :created, location: @post}
+        format.js { render 'destroy', status: :created, location: @post }
         format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }

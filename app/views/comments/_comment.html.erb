@@ -4,18 +4,27 @@
       <div class="col-md-8">
         <div class="card text-center">
           <p class="field">
+
+
+
             <% if current_user %>
               <% pre_like = comment.likes.find { |like| like.author_id == current_user.id} %>
             <% end %>
             <% if current_user and pre_like == nil %>
-              <%= link_to '↑', post_comment_likes_path(@post, comment),method: :post, class: 'badge badge-primary ' %>
-              <strong><%= count_rating(comment.likes)%></strong>
-              <%= link_to '↓', post_comment_dislike_create_path(@post, comment),method: :post, class: 'badge badge-danger' %>
+              <%= link_to '↑', post_comment_likes_path(@post, comment),remote: true ,method: :post, class: 'badge badge-primary ' %>
+              <strong> <%= comment.likes.map(&:value).sum %></strong>
+              <%= link_to '↓', post_comment_dislike_create_path(@post, comment),remote: true,method: :post, class: 'badge badge-danger' %>
             <% elsif %>
               <span class="badge badge-light disabled">↑</span>
-              <strong><%= count_rating(comment.likes)%></strong>
+              <strong> <%= comment.likes.map(&:value).sum %></strong>
               <span class="badge badge-light disabled">↓</span>
             <% end %>
+
+
+
+
+
+
             By <strong><%= comment.author.full_name  %></strong> <br>
            <span class="com_created"> Left  <span data-toggle="tooltip" data-placement="top" title="(<%=comment.created_at  %>)">
               <%= time_ago_in_words(comment.created_at) %>
