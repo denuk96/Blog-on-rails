@@ -13,6 +13,8 @@
 #  password_digest :string
 #  admin           :boolean          default(FALSE)
 #  banned          :boolean          default(FALSE)
+#  email_confirmed :boolean          default(FALSE)
+#  confirm_token   :string
 #
 
 class Author < ApplicationRecord
@@ -24,7 +26,34 @@ class Author < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  # confirm
+  before_create :confirmation_token
+  after_create :send_greatings
+  after_create :send_confirmation
+
+
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
+  # confirm
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(validate: false)
+  end
+
+  def send_greatings
+    AuthorMailer.greatings(self).deliver!
+  end
+
+  def send_confirmation
+    AuthorMailer.registration_confirmation(self).deliver!
+  end
+
+  private
+  # confirm
+  def confirmation_token
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.nil?
   end
 end

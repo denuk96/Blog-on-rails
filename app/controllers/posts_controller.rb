@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    if @current_user.banned == false
+    if (@current_user.banned == false) && (@current_user.email_confirmed == true)
       @post = current_user.posts.build(post_params)
       respond_to do |format|
         if @post.save
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
         end
       end
     else
-      redirect_to home_path, notice: 'Aborted. You are banned.'
+      redirect_to home_path, notice: 'Aborted. You have no rights'
     end
   end
 

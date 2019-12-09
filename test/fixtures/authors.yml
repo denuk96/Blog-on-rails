@@ -13,6 +13,8 @@
 #  password_digest :string
 #  admin           :boolean          default(FALSE)
 #  banned          :boolean          default(FALSE)
+#  email_confirmed :boolean          default(FALSE)
+#  confirm_token   :string
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

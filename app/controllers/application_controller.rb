@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
   before_action :unloged
   before_action :banned?
+  before_action :confirmed?, except: :show
 
   def current_user
     if session[:author_id]
@@ -39,6 +40,13 @@ class ApplicationController < ActionController::Base
   def banned?
     if current_user.present?
       flash[:alert] = 'Your are not allowed to create comments or posts. (banned)' if current_user.banned == true
+    end
+  end
+
+  # check confirmed or not
+  def confirmed?
+    if current_user.present?
+      flash[:alert] = 'Check your email to confirm yourself. (You are not allowed to create posts)' if current_user.email_confirmed == false
     end
   end
 end

@@ -4,9 +4,6 @@
       <div class="col-md-8">
         <div class="card text-center">
           <p class="field">
-
-
-
             <% if current_user %>
               <% pre_like = comment.likes.find { |like| like.author_id == current_user.id} %>
             <% end %>
@@ -19,12 +16,6 @@
               <strong> <%= comment.likes.map(&:value).sum %></strong>
               <span class="badge badge-light disabled">↓</span>
             <% end %>
-
-
-
-
-
-
             By <strong><%= comment.author.full_name  %></strong> <br>
            <span class="com_created"> Left  <span data-toggle="tooltip" data-placement="top" title="(<%=comment.created_at  %>)">
               <%= time_ago_in_words(comment.created_at) %>

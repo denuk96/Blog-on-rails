@@ -8,9 +8,22 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       if @author.save
-        format.html { redirect_to login_path, notice: 'Welcome aboard! Now you can log in!' }
+        format.html { redirect_to login_path, notice: 'Welcome aboard! Check your email to confirm yourself' }
       else
         format.html { render :new }
+      end
+    end
+  end
+
+  # confirm
+  def confirm_email
+    author = Author.find_by_confirm_token(params[:id])
+    respond_to do |format|
+      if author
+        author.email_activate
+        format.html { redirect_to home_path, notice: 'Your email has been confirmed' }
+      else
+        format.html { redirect_to home_path, notice: 'Sorry. User does not exist' }
       end
     end
   end
