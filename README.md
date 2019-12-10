@@ -1,7 +1,7 @@
 
 # Blog-on-rails
 
-RoR GH 19/20 Homework 8 is done
+RoR GH 19/20 Homework 9 is done
 
 To get admin`s rights(/admin) - admin, password 'password'
 
@@ -14,6 +14,8 @@ Here you can:
 - admin can do all the above whenever and whatever he wants
 - ban users (if you are admin ofc)
 - rating system included
+- email confirmation required
+- password reset available
 - try yourself=)
 
 
