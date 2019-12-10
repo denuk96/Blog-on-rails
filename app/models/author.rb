@@ -2,19 +2,20 @@
 #
 # Table name: authors
 #
-#  id              :bigint           not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  gender          :string
-#  birthday        :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  email           :string
-#  password_digest :string
-#  admin           :boolean          default(FALSE)
-#  banned          :boolean          default(FALSE)
-#  email_confirmed :boolean          default(FALSE)
-#  confirm_token   :string
+#  id                     :bigint           not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  gender                 :string
+#  birthday               :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email                  :string
+#  password_digest        :string
+#  admin                  :boolean          default(FALSE)
+#  banned                 :boolean          default(FALSE)
+#  email_confirmed        :boolean          default(FALSE)
+#  confirm_token          :string
+#  password_reset_sent_at :datetime
 #
 
 class Author < ApplicationRecord
@@ -28,7 +29,6 @@ class Author < ApplicationRecord
 
   # confirm
   before_create :confirmation_token
-  after_create :send_greatings
   after_create :send_confirmation
 
 
@@ -43,16 +43,20 @@ class Author < ApplicationRecord
     save!(validate: false)
   end
 
-  def send_greatings
-    AuthorMailer.greatings(self).deliver!
-  end
-
   def send_confirmation
     AuthorMailer.registration_confirmation(self).deliver!
   end
 
+  # password reset
+  def send_password_reset
+    confirmation_token
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    AuthorMailer.password_reset(self).deliver!
+  end
+
   private
-  # confirm
+  # token
   def confirmation_token
     self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.nil?
   end

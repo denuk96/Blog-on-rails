@@ -2,19 +2,20 @@
 #
 # Table name: authors
 #
-#  id              :bigint           not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  gender          :string
-#  birthday        :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  email           :string
-#  password_digest :string
-#  admin           :boolean          default(FALSE)
-#  banned          :boolean          default(FALSE)
-#  email_confirmed :boolean          default(FALSE)
-#  confirm_token   :string
+#  id                     :bigint           not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  gender                 :string
+#  birthday               :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email                  :string
+#  password_digest        :string
+#  admin                  :boolean          default(FALSE)
+#  banned                 :boolean          default(FALSE)
+#  email_confirmed        :boolean          default(FALSE)
+#  confirm_token          :string
+#  password_reset_sent_at :datetime
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

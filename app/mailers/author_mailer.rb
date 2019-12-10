@@ -5,9 +5,9 @@ class AuthorMailer < ApplicationMailer
     mail to: author.email, subject: "Registration Confirmation"
   end
 
-  def greatings(author)
+  def password_reset(author)
     @author = author
-    mail to: author.email, subject: "hello there"
+    mail to: author.email, subject: "Password Reset"
   end
 
 end

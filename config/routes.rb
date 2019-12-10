@@ -19,6 +19,9 @@ Rails.application.routes.draw do
 
   resources :sessions, only: %i[new create destroy]
 
+  get 'password_resets/new'
+  resources :password_resets
+
   get 'signup', to: 'authors#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
