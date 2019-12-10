@@ -1,19 +1,16 @@
 Rails.application.configure do
-
-  config.action_mailer.default_url_options = { host: 'https://protected-depths-71273.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'https://protected-depths-71273.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      domain: 'example.com',
-      user_name: "blog.on.rails.test@gmail.com",
-      password: " (＠´ー`)ﾉﾞ",
-      authentication: 'plain',
-      enable_starttls_auto: true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'example.com',
+    user_name: 'blog.on.rails.test@gmail.com',
+    password: ' (＠´ー`)ﾉﾞ',
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
-
-
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -125,6 +122,4 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-
-
 end

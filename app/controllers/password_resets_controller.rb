@@ -5,17 +5,17 @@ class PasswordResetsController < ApplicationController
 
   def create
     author = Author.find_by_email(params[:email])
-    author.send_password_reset if author
-    redirect_to home_path, notice: "Email sent with password reset instructions."
+    author&.send_password_reset
+    redirect_to home_path, notice: 'Email sent with password reset instructions.'
   end
 
   def edit; end
 
   def update
     if @author.password_reset_sent_at < 1.hour.ago
-      redirect_to new_password_reset_path, alert: "Password reset has expired."
+      redirect_to new_password_reset_path, alert: 'Password reset has expired.'
     elsif @author.update_attributes(params.require(:author).permit(:password, :password_confirmation))
-      redirect_to home_path, notice: "Password has been reset!"
+      redirect_to home_path, notice: 'Password has been reset!'
     else
       render :edit
     end
@@ -27,4 +27,3 @@ class PasswordResetsController < ApplicationController
     @author = Author.find_by_confirm_token!(params[:id])
   end
 end
-

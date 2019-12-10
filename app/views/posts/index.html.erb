@@ -26,7 +26,11 @@
         <div class="container">
           <p class="search alert alert-secondary">There are no posts containing the term(s) <%= params[:search] %>.</p>
         </div>
+
       <% end %>
     </div>
+  </div>
+  <div class="row justify-content-center">
+    <%= will_paginate(@things, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'pagination-sm') %>
   </div>
 </div>

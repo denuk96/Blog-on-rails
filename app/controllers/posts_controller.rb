@@ -7,11 +7,11 @@ class PostsController < ApplicationController
   before_action :owner, only: %i[edit update destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 8)
     @posts = if params[:search]
-               Post.search(params[:search]).order('created_at DESC')
+               Post.search(params[:search]).order('created_at DESC').paginate(page: params[:page], per_page: 8)
              else
-               Post.all.order('created_at DESC')
+               Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 8)
              end
   end
 

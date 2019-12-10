@@ -31,7 +31,6 @@ class Author < ApplicationRecord
   before_create :confirmation_token
   after_create :send_confirmation
 
-
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
@@ -56,6 +55,7 @@ class Author < ApplicationRecord
   end
 
   private
+
   # token
   def confirmation_token
     self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.nil?
