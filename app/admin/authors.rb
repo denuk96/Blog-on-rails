@@ -5,7 +5,7 @@ ActiveAdmin.register Author do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :first_name, :last_name, :gender, :birthday, :email, :admin, :banned, :email_confirmed, :confirm_token, :password_reset_sent_at
+  permit_params :first_name, :last_name, :gender, :birthday, :email, :admin, :banned, :email_confirmed
   #
   # or
   #
