@@ -24,17 +24,13 @@ class Author < ApplicationRecord
   validates :password, presence: true,
                        length: { minimum: 8 }, allow_nil: true
 
-
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-
   # confirm
   before_create :confirmation_token
   after_create :send_confirmation
-
-
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
