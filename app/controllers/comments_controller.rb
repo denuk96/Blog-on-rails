@@ -21,12 +21,8 @@ class CommentsController < ApplicationController
       # next code limits the level of nested comments to 5
       if @comment.ancestors.count <= 4
         respond_to do |format|
-          # next chooses js.erb for creating new comment or nested(reply)
-          if @comment.save && !@comment.ancestry.nil?
-            format.js { render 'create_reply', status: :created, location: @post }
-          elsif @comment.save && @comment.parent_id.nil?
+          if @comment.save
             format.js { render 'create', status: :created, location: @post }
-            format.html { redirect_to @post, notice: 'Comment was successfully created.' }
           else
             format.html { redirect_to @post, alert: @comment.errors.full_messages.first }
           end

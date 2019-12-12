@@ -40,13 +40,13 @@
 
 <h2>Comments</h2>
 <!--this id is outside of partial, otherwise we cant create comments if post dont have anyone-->
-<div id="new_comment">
+<div class="new_comment" id="new_comment">
   <%= nested_comments @post.comments.arrange(order: :created_at) %>
 </div>
 <div class="container">
 <% if current_user  %>
   <% if @current_user.banned == false  %>
-       <%= link_to 'Leave a comment', new_post_comment_path(@post, @post.comments.build), remote: true, class:'btn btn-outline-primary btn-sm btn-block', id:'button_new_comment' %>
+      <%= render 'comments/form' %>
   <% else %>
     <div class="container">
       <div class="alert alert-danger" role="alert">

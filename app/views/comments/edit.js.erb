@@ -1,3 +1,5 @@
 $("#comment-<%=@comment.id %>").hide(250)
 $("#comment-<%=@comment.id %>").after('<%= j render('comments/edit', comment: @comment, ) %>');
 
+//$(".comment-<%=@comment.id %>").replaceWith('<div class="form-edit"><%= j render('comments/replies', comment: @comment) %> </div>');
+//$(".reply-form").hide(500)
