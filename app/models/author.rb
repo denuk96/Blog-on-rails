@@ -21,15 +21,20 @@
 class Author < ApplicationRecord
   has_secure_password
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password_digest, presence: true,
-                              length: { minimum: 8 }
+  validates :password, presence: true,
+                       length: { minimum: 8 }, allow_nil: true
+
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+
   # confirm
   before_create :confirmation_token
   after_create :send_confirmation
+
+
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
@@ -50,9 +55,11 @@ class Author < ApplicationRecord
   def send_password_reset
     confirmation_token
     self.password_reset_sent_at = Time.zone.now
-    save!
+    save!(validate: true)
     AuthorMailer.password_reset(self).deliver!
   end
+
+  # password reset validation
 
   private
 

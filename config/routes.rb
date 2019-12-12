@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
   root 'posts#index', as: 'home'
 
   resources :posts

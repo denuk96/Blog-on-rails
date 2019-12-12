@@ -6,7 +6,7 @@ class PasswordResetsController < ApplicationController
   def create
     author = Author.find_by_email(params[:email])
     author&.send_password_reset
-    redirect_to home_path, notice: 'Email sent with password reset instructions.'
+    redirect_to login_path, notice: 'Email sent with password reset instructions.'
   end
 
   def edit; end
