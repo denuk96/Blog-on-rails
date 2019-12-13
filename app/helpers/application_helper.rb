@@ -6,9 +6,10 @@ module ApplicationHelper
 
   # check owner or admin or not, time limit 1 hour
   def check_edit_rights(current_user, sample)
-    if (current_user.id == sample.author_id && Time.now - sample.created_at < 3600 && current_user.banned == false) || (current_user.admin == true)
-      true
-    end
+    author = current_user.id == sample.author_id
+    time = Time.now - sample.created_at < 3600
+    unbanned = current_user.banned == false
+    true if (author && time && unbanned) || (current_user.admin == true)
   end
 
   # count actions

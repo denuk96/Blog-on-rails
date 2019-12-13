@@ -1,15 +1,15 @@
 <div class="container hide_form">
-    <div class="col-md-8">
-      <%= form_with(model: [ @post, @comment ]) do |form| %>
-        <!--# ancestry-->
-        <%= form.hidden_field :parent_id, value: @comment.parent_id %>
-        <p>
-          <%= form.label :comment %><br>
-          <%= form.text_area :comment, class:'form-control'%>
-        </p>
-        <p>
-          <%= form.submit class:'btn btn-info btn-lg' %>
-        </p>
-      <% end %>
-    </div>
+  <div class="col-md-8">
+    <%= form_with(model: [ @post, @comment ]) do |form| %>
+      <!--# ancestry-->
+      <%= form.hidden_field :parent_id, value: @comment.parent_id %>
+      <p>
+        <%= form.label :comment %><br>
+        <%= form.text_area :comment, class:'form-control'%>
+      </p>
+      <p>
+        <%= form.submit class:'btn btn-info btn-lg' %>
+      </p>
+    <% end %>
+  </div>
 </div>

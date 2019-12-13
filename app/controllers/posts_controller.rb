@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  # impressionist
+  # impressionist gem
   impressionist actions: [:show]
 
   before_action :require_login, only: %i[create edit update destroy]
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    # impressionist
+    # impressionist gem
     impressionist(@post)
   end
 
@@ -32,10 +32,8 @@ class PostsController < ApplicationController
       respond_to do |format|
         if @post.save
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
-          format.json { render :show, status: :created, location: @post }
         else
           format.html { render :new }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
         end
       end
     else
@@ -46,25 +44,18 @@ class PostsController < ApplicationController
   def update
     # If not a owner/admin - you cant edit/destroy
     redirect_to home_path if owner == false
-
     respond_to do |format|
       if @post.update_attributes(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to home_path, notice: 'Post was successfully destroyed.'
   end
 
   private
@@ -75,11 +66,12 @@ class PostsController < ApplicationController
 
   # checking owner or not
   def owner
-    if (@post.author_id == @current_user.id && Time.now - @post.created_at < 3601 && @current_user.banned == false) || (@current_user.admin == true)
+    author = @post.author_id == @current_user.id
+    time = Time.now - @post.created_at < 3601
+    unbanned = @current_user.banned == false
+    if (author && time && unbanned) || (@current_user.admin == true)
     else
-      respond_to do |format|
-        format.html { redirect_to posts_url, alert: 'Rights error' }
-      end
+      redirect_to home_path, alert: 'Rights error'
     end
   end
 

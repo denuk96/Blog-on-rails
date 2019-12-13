@@ -5,7 +5,6 @@
         <img src="<%= rails_blob_url(@post.picture) %>" class="card-img-top" alt="...">
         <div class="card-header">
           By <span class="show_name"><%= @post.author.full_name %></span><br>
-
         </div>
         <div class="card-body">
           <h5 class="card-title "><strong><%= @post.title %></strong></h5>
@@ -24,42 +23,42 @@
             <% end  %>
           </div>
         </div>
-                <div class="card-footer text-muted">
+        <div class="card-footer text-muted">
           <span data-toggle="tooltip" data-placement="top" title="(<%= @post.created_at %>)">
                  <%= fa_icon "calendar" %> <%= time_ago_in_words(@post.created_at) %> <span data-toggle="tooltip" data-placement="top" title="Uniq:(<%= @post.impressionist_count(:filter=>:ip_address) %>)">
-                 <%= fa_icon "eye" %> <%= @post.impressionist_count %>
-                 </span>
+                 <%= fa_icon "eye" %> <%= @post.impressionist_count %> </span>
+          </span>
         </div>
       </div>
     </div>
   </div>
   <% if @post.comments.count == 0 %>
-    <p class="alert alert-info">There are no comments yet, you can be the first</p>
+    <p class="alert alert-info no_comments_message">There are no comments yet, you can be the first</p>
   <% end %>
 </div>
 
 <h2>Comments</h2>
-<!--this id is outside of partial, otherwise we cant create comments if post dont have anyone-->
+<!--this id is outside of partial, otherwise we cant create comments if post doesn't have anyone-->
 <div class="new_comment" id="new_comment">
   <%= nested_comments @post.comments.arrange(order: :created_at) %>
 </div>
 <div class="container">
-<% if current_user  %>
-  <% if @current_user.banned == false  %>
+  <% if current_user  %>
+    <% if @current_user.banned == false  %>
       <%= render 'comments/form' %>
-  <% else %>
-    <div class="container">
-      <div class="alert alert-danger" role="alert">
-        You have no rights to leave comments
-        <br>
+    <% else %>
+      <div class="container">
+        <div class="alert alert-danger" role="alert">
+          You have no rights to leave comments
+          <br>
+        </div>
       </div>
-    </div>
-  <% end  %>
-<% else %>
+    <% end  %>
+  <% else %>
     <div class="alert alert-warning" role="alert">
       Log in to leave comments!
       <br>
     </div>
- <% end  %>
+  <% end  %>
 </div>
 

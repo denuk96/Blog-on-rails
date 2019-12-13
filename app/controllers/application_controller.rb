@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
   # checking logged or not
   def require_login
     redirect_to login_path unless logged_in?
-    # add some flash mess, dont forget
-    # ###############
   end
 
   def login_in(author)
@@ -46,7 +44,9 @@ class ApplicationController < ActionController::Base
   # check confirmed or not
   def confirmed?
     if current_user.present?
-      flash[:alert] = 'Check your email to confirm yourself. (You are not allowed to create posts)' if current_user.email_confirmed == false
+      if current_user.email_confirmed == false
+        flash[:alert] = 'Check your email to confirm yourself. (You are not allowed to create posts)'
+      end
     end
   end
 end

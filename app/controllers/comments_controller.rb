@@ -47,8 +47,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         format.js
-        # format.js {render 'update', status: :created, location: @post}
-        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }
       end
@@ -59,7 +57,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.destroy
         format.js { render 'destroy', status: :created, location: @post }
-        format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
       else
         format.html { redirect_to @post, alert: 'Smth went wrong..' }
       end
@@ -77,7 +74,8 @@ class CommentsController < ApplicationController
   end
 
   def owner
-    if (@comment.author_id == @current_user.id && @current_user.banned == false) || (@current_user.admin == true)
+    rights = (@comment.author_id == @current_user.id && @current_user.banned == false)
+    if rights || (@current_user.admin == true)
     else
       respond_to do |format|
         format.html { redirect_to @post, alert: 'You have no rights' }

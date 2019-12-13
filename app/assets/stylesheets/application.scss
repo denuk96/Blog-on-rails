@@ -21,9 +21,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-.dev  {
-  margin-top: -45px;
-}
 
 .alert {
   text-align: center;
@@ -44,3 +41,9 @@ nav {
   margin-top: 20px;
 }
 
+footer {
+  position: fixed;
+  bottom: 5px;
+  right: 10px;
+  text-align: center;
+}
