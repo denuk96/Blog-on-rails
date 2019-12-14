@@ -10,12 +10,22 @@
 
   </head>
   <body>
-  <% if pop_up and current_user == nil %>
-    <script>alert('Please, sing up or log in');</script>
-  <% end %>
+
+
     <%= render 'layouts/header' %>
     <%= render 'layouts/messages' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
+
+    <%= render 'layouts/modal' %>
+    <script>
+        $('#modal_window').modal();
+    </script>
+
+    <%# if pop_up and current_user == nil %>
+<!--      <script>-->
+<!--          $('#modal_window').modal();-->
+<!--      </script>-->
+    <%# end %>
   </body>
 </html>
