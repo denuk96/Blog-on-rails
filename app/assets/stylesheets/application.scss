@@ -21,7 +21,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-
 .alert {
   text-align: center;
   font-size: 20px;
@@ -37,6 +36,12 @@
 .form-inline {
   margin-top: 0px;
 }
+
+.btn-link {
+  color: black;
+  font-size: 21px;
+}
+
 nav {
   margin-top: 20px;
 }

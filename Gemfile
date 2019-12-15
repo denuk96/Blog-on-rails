@@ -28,14 +28,13 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # My gems
 gem 'activeadmin'
 gem 'ancestry', '~> 3.0', '>= 3.0.7'
+gem 'bootstrap', '~> 4.4.1'
 gem 'bootstrap-will_paginate'
+gem 'coffee-rails', '~> 4.2'
 gem 'font-awesome-rails'
 gem 'impressionist'
-gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'popper_js', '~> 1.14', '>= 1.14.5'
-gem 'bootstrap', '~> 4.4.1'
-gem 'coffee-rails', '~> 4.2'
 
 
 group :development, :test do

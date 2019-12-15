@@ -5,7 +5,6 @@ class AuthorsController < ApplicationController
 
   def create
     @author = Author.new(author_params)
-
     respond_to do |format|
       if @author.save
         format.html { redirect_to login_path, notice: 'Welcome aboard! Check your email to confirm yourself' }

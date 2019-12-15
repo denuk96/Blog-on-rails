@@ -1,7 +1,10 @@
 <header class="header">
   <div class="container">
     <div class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h4 class="my-0 mr-md-auto font-weight-normal">Blog on Rails</h4>
+      <h4 class="my-0 mr-md-auto font-weight-normal">
+        <button type="button" class="btn btn-lg btn-link" data-toggle="popover"
+                data-placement="bottom" data-content="Created by Denys Taradada for GeekHub 2019/20">Blog on Rails</button>
+      </h4>
       <div class="form-inline">
         <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
           <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:'form-control' %>
@@ -14,11 +17,10 @@
           <% if @current_user.banned == false  %>
             <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
           <% end %>
-            <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
         <% else %>
-          <button type="button" class="btn btn-primary" disabled data-toggle="tooltip" data-placement="top" title="Sign up or log in to create posts">
-            New Post
-          </button>
+          <button type="button" class="btn btn-primary" data-toggle="popover"
+                  data-placement="bottom" data-content="Log in or Sing up">New Post</button>
           <%= link_to 'Sign Up', signup_path, class: 'btn btn-outline-primary'  %>
           <%= link_to 'Log In', login_path, class: 'btn btn-outline-primary'  %>
         <% end %>
