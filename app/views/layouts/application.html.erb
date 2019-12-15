@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>
-      <%= 'Blog on Rails' if @post.nil? %>
-      <%= @post.title.capitalize if @post.present? %>
+      <%= 'Blog on Rails' if @post.nil?  %>
+      <%= @post.title if @post.present? %>
     </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
