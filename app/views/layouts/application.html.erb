@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>
+      <%= 'Blog on Rails' if @post.nil? %>
+      <%= @post.title.capitalize if @post.present? %>
+    </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -25,9 +28,7 @@
       </script>
     <% end %>
     <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
+      $('[data-toggle="popover"]').popover();
     </script>
   </body>
 </html>

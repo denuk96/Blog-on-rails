@@ -24,7 +24,11 @@
                 </p>
               </div>
               <div class="img">
-                <img src= <%= rails_blob_url(post.picture) %>>
+                <% if post.picture.attached? %>
+                  <img src= <%= rails_blob_url(post.picture) %>>
+                <% else %>
+                  <%= image_tag("http://www.santis.mn/nimage.png") %>
+                <% end %>
               </div>
             </div>
           </div>
