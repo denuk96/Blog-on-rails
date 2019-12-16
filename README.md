@@ -1,7 +1,7 @@
 
 # Blog-on-rails
 
-RoR GH 19/20 Homework 9 is done
+RoR GH 19/20 Blog is done
 
 To get admin`s rights(/admin) - admin, password 'password'
 
