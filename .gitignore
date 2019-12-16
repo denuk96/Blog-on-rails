@@ -81,4 +81,3 @@ yarn-debug.log*
 .yarn-integrity
 /config/master.key
 yarn.lock
-Gemfile.lock
