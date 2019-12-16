@@ -1,5 +1,5 @@
 class ActiveAdmin::BaseController
-  http_basic_authenticate_with name: 'admin', password: 'password'
+  http_basic_authenticate_with name: 'admin', password: Rails.application.credentials.aws[:http_password]
 end
 ActiveAdmin.setup do |config|
   # == Site Title

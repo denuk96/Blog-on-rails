@@ -6,8 +6,8 @@ default: &default
 development:
   <<: *default
   database: BlogOnRails_development
-  username: denuk96
-  password: denuk96
+  username: <%= Rails.application.credentials.aws[:db_user] %>
+  password: <%= Rails.application.credentials.aws[:db_password] %>
   encoding: unicode
   host: localhost
   pool: 5
@@ -15,8 +15,8 @@ development:
 test:
   <<: *default
   database: BlogOnRails_test
-  username: denuk96
-  password: denuk96
+  username: <%= Rails.application.credentials.aws[:db_user] %>
+  password: <%= Rails.application.credentials.aws[:db_password] %>
   encoding: unicode
   host: localhost
   pool: 5
