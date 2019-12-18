@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def create
     # aborting banned users
-    if @current_user.banned == false
+    if !@current_user.banned?
       @comment = @post.comments.create(comment_params)
       @comment.author_id = current_user.id
       # next code limits the level of nested comments to 5
@@ -74,8 +74,8 @@ class CommentsController < ApplicationController
   end
 
   def owner
-    rights = (@comment.author_id == @current_user.id && @current_user.banned == false)
-    if rights || (@current_user.admin == true)
+    rights = (@comment.author_id == @current_user.id && !@current_user.banned?)
+    if rights || (@current_user.admin?)
     else
       respond_to do |format|
         format.html { redirect_to @post, alert: 'You have no rights' }

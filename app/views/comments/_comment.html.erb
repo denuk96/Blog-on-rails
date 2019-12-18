@@ -7,7 +7,7 @@
             <% if current_user %>
               <% pre_like = comment.likes.find { |like| like.author_id == current_user.id} %>
             <% end %>
-            <% if current_user and pre_like == nil %>
+            <% if current_user and pre_like.nil? %>
               <%= link_to '↑', post_comment_likes_path(@post, comment),remote: true ,method: :post, class: 'badge badge-primary ' %>
               <strong> <%= comment.likes.map(&:value).sum %></strong>
               <%= link_to '↓', post_comment_dislike_create_path(@post, comment),remote: true,method: :post, class: 'badge badge-danger' %>
@@ -32,7 +32,7 @@
           <p>
             <% if current_user %>
               <div class="btn-group" role="group" aria-label="Basic example" >
-                <%= link_to "Reply", new_post_comment_path(comment.post, :parent_id => comment.id, js: true), remote: true, class:'btn btn-sm btn-outline-secondary' %>
+                <%= link_to "Reply", new_post_comment_path(comment.post, parent_id: comment.id, js: true), remote: true, class:'btn btn-sm btn-outline-secondary' %>
                 <% if check_edit_rights(@current_user,comment) %>
                 <%= link_to "Edit", edit_post_comment_path(comment.post, comment), remote: true, class:'btn btn-sm btn-outline-secondary ' %>
                 <%= link_to 'Destroy Comment', [comment.post, comment], remote: true,

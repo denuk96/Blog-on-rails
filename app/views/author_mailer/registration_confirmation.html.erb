@@ -1,3 +1,12 @@
-<h1>Hi <%= @author.full_name %>,</h1>
-<p>Thanks for registering! To confirm your registration click the URL below.</p>
-<h3><%= confirm_email_author_url(@author.confirm_token) %></h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @author.full_name %>,</h1>
+    <p>Thanks for registering! To confirm your registration click the URL below.</p>
+    <h3><%= confirm_email_author_url(@author.confirm_token) %></h3>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

@@ -34,6 +34,7 @@ class Author < ApplicationRecord
   validate :pass_val
 
   def pass_val
+    # next line avoid error with ActiveAdmin
     if password.present?
       if password.count('a-z') <= 0 || password.count('A-Z') <= 0 # || password_digest.count((0-9).to_s) <= 0
         errors.add(:password, 'must contain 1 small letter, 1 capital letter and minimum 8 symbols')

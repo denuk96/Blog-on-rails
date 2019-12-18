@@ -1,5 +1,5 @@
 <div class="container">
-  <%= form_for @author, :url => password_reset_path(params[:id]) do |f| %>
+  <%= form_for @author, url: password_reset_path(params[:id]) do |f| %>
     <% if @author.errors.any? %>
       <div class="alert alert-danger">
         <h2>Form is invalid</h2>
