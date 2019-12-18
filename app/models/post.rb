@@ -23,7 +23,7 @@ class Post < ApplicationRecord
                     length: { minimum: 5, maximum: 20 }
 
   def self.search(search)
-    where('title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%")
+    where('title ILIKE ? OR content ILIKE ?', "%#{search}%", "%#{search}%")
   end
 
   # impressionist

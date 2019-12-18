@@ -81,3 +81,4 @@ yarn-debug.log*
 .yarn-integrity
 /config/master.key
 yarn.lock
+!/config/database.yml
