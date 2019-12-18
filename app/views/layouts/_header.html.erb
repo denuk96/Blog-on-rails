@@ -6,7 +6,7 @@
                 data-placement="bottom" data-content="Created by Denys Taradada for GeekHub 2019/20">Blog on Rails</button>
       </h4>
       <div class="form-inline">
-        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+        <%= form_tag(posts_path, method: "get", id: "search-form") do %>
           <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:'form-control' %>
           <%= submit_tag "Search", class:'btn btn-info' %>
         <% end %>
@@ -14,8 +14,12 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <%= link_to 'Home', posts_path, class: 'btn btn-primary' %>
         <% if current_user %>
-          <% if @current_user.banned == false  %>
+          <%# if @current_user.banned == false and @current_user.email_confirmed == true %>
+          <% if !@current_user.banned? and @current_user.email_confirmed? %>
             <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+          <% else %>
+            <button type="button" class="btn btn-primary" data-toggle="popover"
+                    data-placement="bottom" data-content="Have no rights">New Post</button>
           <% end %>
           <%= link_to 'Log Out', logout_path, class: 'btn btn-outline-primary' %>
         <% else %>

@@ -20,17 +20,26 @@
 
 class Author < ApplicationRecord
   has_secure_password
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true,
-                       length: { minimum: 8 }, allow_nil: true
+  # confirm
+  before_create :confirmation_token
+  after_create :send_confirmation
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  # confirm
-  before_create :confirmation_token
-  after_create :send_confirmation
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true,
+                       length: { minimum: 8 }, allow_nil: true
+  validate :pass_val
+
+  def pass_val
+    if password.present?
+      if password.count('a-z') <= 0 || password.count('A-Z') <= 0 # || password_digest.count((0-9).to_s) <= 0
+        errors.add(:password, 'must contain 1 small letter, 1 capital letter and minimum 8 symbols')
+      end
+    end
+  end
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
@@ -54,8 +63,6 @@ class Author < ApplicationRecord
     save!(validate: true)
     AuthorMailer.password_reset(self).deliver!
   end
-
-  # password reset validation
 
   private
 

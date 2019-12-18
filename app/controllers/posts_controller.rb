@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    if (@current_user.banned == false) && (@current_user.email_confirmed == true)
+    if (!@current_user.banned?) && (@current_user.email_confirmed?)
       @post = current_user.posts.build(post_params)
       respond_to do |format|
         if @post.save
@@ -42,8 +42,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    # If not a owner/admin - you cant edit/destroy
-    redirect_to home_path if owner == false
     respond_to do |format|
       if @post.update_attributes(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -68,8 +66,8 @@ class PostsController < ApplicationController
   def owner
     author = @post.author_id == @current_user.id
     time = Time.now - @post.created_at < 3601
-    unbanned = @current_user.banned == false
-    if (author && time && unbanned) || (@current_user.admin == true)
+    unbanned = !@current_user.banned?
+    if (author && time && unbanned) || (@current_user.admin?)
     else
       redirect_to home_path, alert: 'Rights error'
     end
