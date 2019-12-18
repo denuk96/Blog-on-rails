@@ -10,9 +10,11 @@
           <h5 class="card-title "><strong><%= @post.title %></strong></h5>
           <p class="card-text"><%= sanitize @post.content %></p>
           <% if updated(@post) %>
-            <p class="updated"> <span data-toggle="tooltip" data-placement="top" title="(<%=@post.updated_at  %>)">
-              Edited <%= time_ago_in_words(@post.updated_at) %> ago..
-            </span> </p>
+            <p class="updated">
+              <span data-toggle="tooltip" data-placement="top" title="(<%=@post.updated_at  %>)">
+                Edited <%= time_ago_in_words(@post.updated_at) %> ago..
+              </span>
+            </p>
           <% end  %>
           <div class="btn-group" role="group" aria-label="Basic example">
             <% if current_user %>

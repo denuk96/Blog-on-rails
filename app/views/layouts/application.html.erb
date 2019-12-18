@@ -22,11 +22,6 @@
     <%= yield %>
     <%= render 'layouts/footer' %>
     <%= render 'layouts/modal' %>
-    <% if pop_up and current_user.nil? %>
-      <script>
-          $('#modal_window').modal();
-      </script>
-    <% end %>
     <script>
       $('[data-toggle="popover"]').popover();
     </script>
