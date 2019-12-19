@@ -1,7 +1,11 @@
 <div class="container">
   <% if !notice.nil?  %>
-    <p class="alert alert-primary" role="alert"><%= notice %></p>
+    <p class="alert alert-primary" role="alert">
+      <%= notice %>
+    </p>
   <% elsif !alert.nil? %>
-    <p class="alert alert-danger" role="alert"><%= alert %></p>
+    <p class="alert alert-danger" role="alert">
+      <%= alert %>
+    </p>
   <% end %>
 </div>

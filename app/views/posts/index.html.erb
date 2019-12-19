@@ -15,7 +15,7 @@
                 <div class="mb-1 text-muted">
                   <span data-toggle="tooltip" data-placement="top" title="(<%=post.created_at %>)">
                   <%= fa_icon "calendar" %> <%= time_ago_in_words(post.created_at) %></span>
-                  <span data-toggle="tooltip" data-placement="top" title="Uniq(<%= post.impressionist_count(:filter=>:ip_address) %>)">
+                  <span data-toggle="tooltip" data-placement="top" title="Uniq(<%= post.impressionist_count(filter: :ip_address) %>)">
                   <%= fa_icon "eye" %> <%= post.impressionist_count %></span>
                   <%= fa_icon "comment" %> <%= post.comments.count  %>
                 </div>
@@ -33,7 +33,9 @@
         <% end %>
       <% else %>
         <div class="container">
-          <p class="search alert alert-secondary">There are no posts containing the term(s) <%= params[:search] %>.</p>
+          <p class="search alert alert-secondary">
+            There are no posts containing the term(s) <%= params[:search] %>.
+          </p>
         </div>
       <% end %>
     </div>

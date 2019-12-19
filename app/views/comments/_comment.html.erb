@@ -9,7 +9,7 @@
             <% end %>
             <% if current_user and pre_like.nil? %>
               <%= link_to '↑', post_comment_likes_path(@post, comment),remote: true ,method: :post, class: 'badge badge-primary ' %>
-              <strong> <%= comment.likes.map(&:value).sum %></strong>
+              <strong> <%= comment.likes.map(&:value).sum %> </strong>
               <%= link_to '↓', post_comment_dislike_create_path(@post, comment),remote: true,method: :post, class: 'badge badge-danger' %>
             <% else %>
               <span class="badge badge-light disabled">↑</span>

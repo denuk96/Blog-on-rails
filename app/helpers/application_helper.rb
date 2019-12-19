@@ -8,8 +8,8 @@ module ApplicationHelper
   def check_edit_rights(current_user, sample)
     author = current_user.id == sample.author_id
     time = Time.now - sample.created_at < 3600
-    unbanned = current_user.banned == false
-    true if (author && time && unbanned) || (current_user.admin == true)
+    unbanned = !current_user.banned?
+    true if (author && time && unbanned) || (current_user.admin?)
   end
 
   # count actions
