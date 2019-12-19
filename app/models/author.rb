@@ -29,15 +29,14 @@ class Author < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true,
-                       length: { minimum: 8 }, allow_nil: true
+  validates :password, :first_name, :last_name, presence: true, allow_nil: true
   validate :pass_val
 
   def pass_val
     # next line avoid error with ActiveAdmin
     if password.present?
-      if password.count('a-z') <= 0 || password.count('A-Z') <= 0 # || password_digest.count((0-9).to_s) <= 0
-        errors.add(:password, 'must contain 1 small letter, 1 capital letter and minimum 8 symbols')
+      if password.count('a-z') <= 0 || password.count('A-Z') <= 0 || password.count('0-9') <= 0
+        errors.add(:password, 'must contain 1 small letter, 1 capital letter, 1 number and minimum 8 symbols')
       end
     end
   end

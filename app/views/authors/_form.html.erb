@@ -12,16 +12,16 @@
     <% end %>
 
     <div class="field">
-      <%= form.label :first_name %>
+      <%= form.label :first_name %><i>*</i>
       <%= form.text_field :first_name, class:'form-control' %>
     </div>
     <div class="field">
-      <%= form.label :last_name %>
+      <%= form.label :last_name %><i>*</i>
       <%= form.text_field :last_name, class:'form-control' %>
     </div>
 
     <div class="field">
-      <%= form.label :email %>
+      <%= form.label :email %><i>*</i>
       <%= form.text_field :email, class:'form-control' %>
     </div>
 
@@ -32,6 +32,7 @@
 
     <div class="field">
       <%= form.label :gender %>
+      <br>
       <%= form.label :gender, "male", value: "male"  %>
       <%= form.radio_button :gender, 'male' %>
       <%= form.label :gender, "female", value: "female" %>
@@ -39,12 +40,12 @@
     </div>
 
     <div class="field">
-      <%= form.label :password %>
+      <%= form.label :password %><i>*</i>
       <%= form.password_field :password, class:'form-control' %>
     </div>
 
     <div class="field">
-      <%= form.label :password_confirmation %>
+      <%= form.label :password_confirmation %><i>*</i>
       <%= form.password_field :password_confirmation, class:'form-control' %>
     </div>
 
