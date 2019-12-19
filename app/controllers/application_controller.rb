@@ -36,17 +36,11 @@ class ApplicationController < ActionController::Base
 
   # check banned or not
   def banned?
-    if current_user.present?
-      flash[:alert] = 'Your are not allowed to create comments or posts. (banned)' if current_user.banned == true
-    end
+    flash[:alert] = 'Your are not allowed to create comments or posts. (banned)' if current_user&.banned?
   end
 
   # check confirmed or not
   def confirmed?
-    if current_user.present?
-      if current_user.email_confirmed == false
-        flash[:alert] = 'Check your email to confirm yourself. (You are not allowed to create posts)'
-      end
-    end
+    flash[:alert] = 'Check your email to confirm yourself.(You are not allowed to create posts)' unless current_user&.email_confirmed?
   end
 end
